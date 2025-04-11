@@ -1,5 +1,11 @@
 # @svg-to-motion-canvas/translator
 
+## 0.0.2
+
+### Patch Changes
+
+- 8c8743d: First automated publish try2
+
 ## 0.0.16
 
 ### Patch Changes
