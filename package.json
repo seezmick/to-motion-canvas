@@ -1,10 +1,10 @@
 {
   "name": "svg-to-motion-canvas",
-  "version": "0.0.63",
+  "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "pnpm --filter translator test",
-    "build": "pnpm --filter translator build",
+    "test": "pnpm --filter codegen test",
+    "build": "pnpm --filter codegen build",
     "ci:publish": "pnpm build && pnpm publish -r"
   },
   "packageManager": "pnpm@9.12.3",
@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "packages/translator"
+    "packages/codegen"
   ],
   "devDependencies": {
     "@changesets/cli": "^2.28.1"

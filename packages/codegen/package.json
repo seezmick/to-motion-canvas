@@ -1,6 +1,6 @@
 {
-  "name": "@svg-to-motion-canvas/translator",
-  "version": "0.0.16",
+  "name": "@to-motion-canvas/codegen",
+  "version": "0.0.1",
   "bin": "dist/bin.js",
   "scripts": {
     "build": "rm -rf dist && rollup -c",
