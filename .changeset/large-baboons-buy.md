@@ -2,4 +2,4 @@
 "@to-motion-canvas/codegen": patch
 ---
 
-First automated publish
+First automated publish try2
