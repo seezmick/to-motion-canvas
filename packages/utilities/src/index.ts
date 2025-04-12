@@ -2,7 +2,7 @@ export {
 	Operator,
 	NumericalExpression,
 	InitNumericaExpressionFn,
-	initnumericalExpression,
+	initNumericalExpression,
 	NumberOrNumericalExpression,
 } from "./numericalExpression/NumericalExpression";
 

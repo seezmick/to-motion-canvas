@@ -1,7 +1,11 @@
 import { Element } from '../Element';
 import { Transformer } from '../../transformer/Transformer';
-import { Position } from '@to-motion-canvas/utilities';
-import { initNumericalExpression, InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
+import {
+  initNumericalExpression,
+  Position,
+  InitNumericaExpressionFn,
+  NumericalExpression
+} from '@to-motion-canvas/utilities';
 import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
 import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 

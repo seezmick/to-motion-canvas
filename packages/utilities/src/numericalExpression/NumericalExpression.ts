@@ -133,7 +133,7 @@ export type InitNumericaExpressionFn
   = (value: NumberOrNumericalExpression) => NumericalExpression;
 
 // TODO: correct name to InitNumericalExpression
-export const initnumericalExpression: InitNumericaExpressionFn
+export const initNumericalExpression: InitNumericaExpressionFn
   = (value: NumberOrNumericalExpression) => new _NumericalExpression({
     initContainerNodeFn: initContainerNode,
     initLeafNodeFn: initLeafNode,
