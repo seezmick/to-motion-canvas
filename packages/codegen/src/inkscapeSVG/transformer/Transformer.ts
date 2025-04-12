@@ -1,5 +1,5 @@
-import { initNumbericalExpression, InitNumericaExpressionFn, NumericalExpression } from "../../utilities/numericalExpression/NumericalExpression";
-import { Position } from "../../utilities/Position";
+import { initNumericalExpression, InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
+import { Position } from '@to-motion-canvas/utilities';
 import {
   initTransformAttributeParser, TransformAttributeParser
 } from "./TransformAttributeParser";
@@ -84,7 +84,7 @@ export type InitTransformerFn
 export const initTransformer: InitTransformerFn
   = () => new _Transformer({
     transformAttributeParser: initTransformAttributeParser(),
-    initNumericalExpressionFn: initNumbericalExpression,
+    initNumericalExpressionFn: initNumericalExpression,
     initTranslateFn: initTranslate,
     initScaleFn: initScale,
   });

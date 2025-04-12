@@ -3,8 +3,8 @@ import { Substitute } from '@fluffy-spoon/substitute';
 import { _Transformer, AddForUserlandConversionFnArgs } from './Transformer';
 import { TransformAttributeParser } from './TransformAttributeParser';
 import { TransformDefinition } from './transformDefinition/TransformDefinition';
-import { Position } from '../../utilities/Position';
-import { InitNumericaExpressionFn, NumericalExpression } from '../../utilities/numericalExpression/NumericalExpression';
+import { Position } from '@to-motion-canvas/utilities';
+import { InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
 import { InitTranslateFn } from './transformDefinition/translate/Translate';
 import { InitScaleFn } from './transformDefinition/scale/Scale';
 

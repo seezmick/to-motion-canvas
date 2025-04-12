@@ -5,7 +5,7 @@ import { InitMotionCanvasNodeTreeFn, MotionCanvasNodeTree } from "../MotionCanva
 import { ChildFactory } from "./childFactory/ChildFactory";
 import { _Factory } from "./Factory";
 import { MotionCanvasNodeTreeFields } from '../../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
-import { NumericalExpression } from '../../utilities/numericalExpression/NumericalExpression';
+import { NumericalExpression } from '@to-motion-canvas/utilities';
 import { RectNodeFields } from '../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 import { Node } from '../node/Node';
 

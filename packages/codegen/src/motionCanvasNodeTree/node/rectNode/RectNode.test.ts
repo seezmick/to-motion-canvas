@@ -9,7 +9,7 @@ import { PropFields as JSXComponentPropFields } from '../jsxComponent/prop/Prop'
 import { CamelCaseWrapper } from '../../../wrappers/CamelCaseWrapper';
 import { NodeReference } from '../../MotionCanvasCodeRenderer';
 import { Node } from '../Node';
-import { NumericalExpression } from '../../../utilities/numericalExpression/NumericalExpression';
+import { NumericalExpression } from '@to-motion-canvas/utilities';
 
 //TODO: write a spec like this but with different fields excluded
 t.test('toJSXComponent correctly builds JSXComponent with no children', t => {

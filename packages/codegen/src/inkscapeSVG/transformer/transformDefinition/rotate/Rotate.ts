@@ -1,5 +1,5 @@
-import { NumberOrNumericalExpression, NumericalExpression } from "../../../../utilities/numericalExpression/NumericalExpression";
-import { Position } from "../../../../utilities/Position";
+import { NumberOrNumericalExpression, NumericalExpression } from '@to-motion-canvas/utilities';
+import { Position } from '@to-motion-canvas/utilities';
 import {
   Options,
   TransformDefinition,

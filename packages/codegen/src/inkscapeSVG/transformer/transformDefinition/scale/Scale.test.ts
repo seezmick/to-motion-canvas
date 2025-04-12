@@ -1,7 +1,7 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _Scale, ScaleFields } from './Scale';
-import { NumericalExpression } from '../../../../utilities/numericalExpression/NumericalExpression';
+import { NumericalExpression } from '@to-motion-canvas/utilities';
 import { Options } from '../TransformDefinition';
 
 t.test('applyToPosition works', t => {

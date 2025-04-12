@@ -1,7 +1,7 @@
 import { Element } from '../Element';
 import { Transformer } from '../../transformer/Transformer';
-import { Position } from '../../../utilities/Position';
-import { initNumbericalExpression, InitNumericaExpressionFn, NumericalExpression } from '../../../utilities/numericalExpression/NumericalExpression';
+import { Position } from '@to-motion-canvas/utilities';
+import { initNumericalExpression, InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
 import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
 import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 
@@ -104,5 +104,5 @@ export type InitRectElementFn = (init: RectElementFields) => RectElement;
 
 export const initRectElement: InitRectElementFn
   = (init: RectElementFields) => new _RectElement({
-    initNumericalExpressionFn: initNumbericalExpression,
+    initNumericalExpressionFn: initNumericalExpression,
   }, init);

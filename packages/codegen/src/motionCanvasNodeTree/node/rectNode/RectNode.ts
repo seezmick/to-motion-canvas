@@ -5,8 +5,8 @@ import { Node as MotionCanvasNode } from '../Node';
 import { PropFields as JSXComponentPropField } from '../jsxComponent/prop/Prop';
 import { CamelCaseWrapper, initCamelCaseWrapper } from '../../../wrappers/CamelCaseWrapper';
 import { NodeReference } from '../../MotionCanvasCodeRenderer';
-import { Position } from '../../../utilities/Position';
-import { NumericalExpression } from '../../../utilities/numericalExpression/NumericalExpression';
+import { Position } from '@to-motion-canvas/utilities';
+import { NumericalExpression } from '@to-motion-canvas/utilities';
 import { RectNodeFieldsWithChildType } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 import { NodeTypes } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
 

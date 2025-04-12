@@ -3,8 +3,8 @@ import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _RectElement, RectElementFields } from './RectElement';
 import { Element } from '../Element';
 import { Transformer } from '../../transformer/Transformer';
-import { Position } from '../../../utilities/Position';
-import { InitNumericaExpressionFn, NumericalExpression } from '../../../utilities/numericalExpression/NumericalExpression';
+import { Position } from '@to-motion-canvas/utilities';
+import { InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
 import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 
 t.test('constructor correctly assigns props to same-name fields', t => {

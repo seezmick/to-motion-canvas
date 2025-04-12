@@ -1,5 +1,5 @@
-import { initNumbericalExpression, InitNumericaExpressionFn, NumberOrNumericalExpression, NumericalExpression } from "../../../../utilities/numericalExpression/NumericalExpression";
-import { Position } from "../../../../utilities/Position";
+import { initNumericalExpression, InitNumericaExpressionFn, NumberOrNumericalExpression, NumericalExpression } from '@to-motion-canvas/utilities';
+import { Position } from '@to-motion-canvas/utilities';
 import { Options, TransformDefinition } from "../TransformDefinition";
 
 // https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform#scale

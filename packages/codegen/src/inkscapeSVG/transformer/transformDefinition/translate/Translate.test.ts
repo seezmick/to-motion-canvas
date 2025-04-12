@@ -1,7 +1,7 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _Translate, TranslateFields } from './Translate';
-import { NumericalExpression } from '../../../../utilities/numericalExpression/NumericalExpression';
+import { NumericalExpression } from '@to-motion-canvas/utilities';
 
 t.test('applyToPosition works', t => {
   const translateX = Substitute.for<NumericalExpression>();

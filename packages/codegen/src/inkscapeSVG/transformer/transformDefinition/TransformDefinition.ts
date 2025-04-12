@@ -1,5 +1,5 @@
-import { NumericalExpression } from "../../../utilities/numericalExpression/NumericalExpression";
-import { Position } from "../../../utilities/Position";
+import { NumericalExpression } from '@to-motion-canvas/utilities';
+import { Position } from '@to-motion-canvas/utilities';
 
 export interface Options {
   dontResolveWhenApplying: boolean

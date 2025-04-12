@@ -5,7 +5,7 @@ import { initSvgsonWrapper, SvgsonWrapper } from '../wrappers/SvgsonWrapper';
 import { ElementParserFactory, initElementParserFactory } from './element/ElementParserFactory';
 import { INode } from "svgson";
 import { initTransformer, Transformer } from './transformer/Transformer';
-import { Position } from '../utilities/Position';
+import { Position } from '@to-motion-canvas/utilities';
 
 export interface InkscapeSVGParser {
   parse(str: string): InkscapeSVG;
