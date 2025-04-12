@@ -1,22 +1,18 @@
 import { InkscapeSVGConfig } from '../mainConfig/MainConfigSchema';
+import { MotionCanvasNodeTreeFieldsWithChildType } from '../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
 import { FsWrapper, initFsWrapper } from '../wrappers/FsWrapper';
-import { initMotionCanvasCodeRenderer, MotionCanvasCodeRenderer, NodeReference, OutputFileFields } from './MotionCanvasCodeRenderer';
+import { initMotionCanvasCodeRenderer, MotionCanvasCodeRenderer, OutputFileFields } from './MotionCanvasCodeRenderer';
 import { MotionCanvasNodesList } from './MotionCanvasNodesList';
-import { JSXComponent } from './node/jsxComponent/JSXComponent';
-import { Node as MotionCanvasNode } from './node/Node';
 
-export interface MotionCanvasNodeTreeFields {
-	nodes: MotionCanvasNodesList;
-	canvasHeight: number,
-	canvasWidth: number,
-}
+export interface InitMotionCanvasNodeTreeFnArg
+	extends MotionCanvasNodeTreeFieldsWithChildType<MotionCanvasNodesList> { }
 
 export interface MotionCanvasNodeTree {
 	generateOutputFiles(config: InkscapeSVGConfig): Promise<void>;
 }
 
 export class _MotionCanvasNodeTree
-	implements MotionCanvasNodeTree, MotionCanvasNodeTreeFields {
+	implements MotionCanvasNodeTree, InitMotionCanvasNodeTreeFnArg {
 	nodes: MotionCanvasNodesList;
 	canvasHeight: number = 0;
 	canvasWidth: number = 0;
@@ -24,7 +20,7 @@ export class _MotionCanvasNodeTree
 	constructor(public deps: {
 		codeRenderer: MotionCanvasCodeRenderer,
 		fs: FsWrapper,
-	}, fields: MotionCanvasNodeTreeFields) {
+	}, fields: InitMotionCanvasNodeTreeFnArg) {
 		Object.assign(this, fields);
 		this.nodes = fields.nodes;
 	}
@@ -54,10 +50,10 @@ export class _MotionCanvasNodeTree
 }
 
 export type InitMotionCanvasNodeTreeFn = (
-	fields: MotionCanvasNodeTreeFields) => MotionCanvasNodeTree;
+	fields: InitMotionCanvasNodeTreeFnArg) => MotionCanvasNodeTree;
 
 export const initMotionCanvasNodeTree = (
-	fields: MotionCanvasNodeTreeFields) =>
+	fields: InitMotionCanvasNodeTreeFnArg) =>
 	new _MotionCanvasNodeTree({
 		codeRenderer: initMotionCanvasCodeRenderer(),
 		fs: initFsWrapper(),

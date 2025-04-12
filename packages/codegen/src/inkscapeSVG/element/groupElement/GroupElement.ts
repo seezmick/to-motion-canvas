@@ -1,5 +1,5 @@
-import { Node as MotionCanvasNode } from '../../../motionCanvasNodeTree/node/Node';
-import { initRectNode, InitRectNode, RectNodeFields } from '../../../motionCanvasNodeTree/node/rectNode/RectNode';
+import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
+import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 import { Element } from '../Element';
 
 export interface GroupElementFields {
@@ -20,17 +20,16 @@ export class _GroupElement implements GroupElement {
   children: Element[] = [];
 
   constructor(public deps: {
-    initMotionCanvasRectNodeFn: InitRectNode,
   }, init: GroupElementFields) {
     Object.assign(this, init);
   }
 
-  toMotionCanvasNodes(): MotionCanvasNode[] {
-    return [this.deps.initMotionCanvasRectNodeFn({
+  toMotionCanvasNodesFields(): NodeFields[] {
+    return [{
       refName: this.id,
-      children: this.children.map(child => child.toMotionCanvasNodes()).flat(),
-    } satisfies RectNodeFields,
-    )];
+      type: 'Rect',
+      children: this.children.map(child => child.toMotionCanvasNodesFields()).flat(),
+    } satisfies RectNodeFields];
   }
 
 }
@@ -39,5 +38,4 @@ export type InitGroupElementFn = (init: GroupElementFields) => GroupElement;
 
 export const initGroupElement: InitGroupElementFn
   = (init: GroupElementFields) => new _GroupElement({
-    initMotionCanvasRectNodeFn: initRectNode
   }, init);

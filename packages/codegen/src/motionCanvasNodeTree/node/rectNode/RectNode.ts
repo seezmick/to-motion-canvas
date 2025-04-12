@@ -1,32 +1,27 @@
 import { JSXComponent, JSXComponentFields } from '../jsxComponent/JSXComponent';
 import { initJSXComponentFactoryFn, JSXComponentFactory } from '../jsxComponent/JSXComponentFactory';
 import { initJSXComponentPropFactoryFn, PropFactory as JSXComponentPropFactory } from '../jsxComponent/prop/PropFactory';
-import { Node as MotionCanvasNode, NodeFields } from '../Node';
+import { Node as MotionCanvasNode } from '../Node';
 import { PropFields as JSXComponentPropField } from '../jsxComponent/prop/Prop';
 import { CamelCaseWrapper, initCamelCaseWrapper } from '../../../wrappers/CamelCaseWrapper';
 import { NodeReference } from '../../MotionCanvasCodeRenderer';
 import { Position } from '../../../utilities/Position';
 import { NumericalExpression } from '../../../utilities/numericalExpression/NumericalExpression';
+import { RectNodeFieldsWithChildType } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { NodeTypes } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
 
-export interface RectNodeFields extends NodeFields {
-  width?: NumericalExpression;
-  height?: NumericalExpression;
-  topLeft?: Position<NumericalExpression>;
-  fill?: string;
-  stroke?: string;
-  lineWidth?: NumericalExpression;
-  radius?: NumericalExpression;
-  children: MotionCanvasNode[];
-}
+export interface InitRectNodeArg
+  extends RectNodeFieldsWithChildType<MotionCanvasNode[]> { }
 
 export interface RectNode
-  extends MotionCanvasNode, RectNodeFields {
+  extends MotionCanvasNode, InitRectNodeArg {
 }
 
 export class _RectNode implements RectNode {
   // these defaults are necessary because typescript
   // doesn't play nice with Object.assign
   refName: string = '';
+  type: NodeTypes = 'Rect';
   width?: NumericalExpression;
   height?: NumericalExpression;
   topLeft?: Position<NumericalExpression>;
@@ -42,7 +37,7 @@ export class _RectNode implements RectNode {
       jsxComponentFactory: JSXComponentFactory,
       jsxComponentPropFactory: JSXComponentPropFactory,
     },
-    init: RectNodeFields,) {
+    init: InitRectNodeArg,) {
     Object.assign(this, init);
   }
 
@@ -115,11 +110,11 @@ export class _RectNode implements RectNode {
 }
 
 export type InitRectNode = (
-  init: RectNodeFields,
+  init: InitRectNodeArg,
 ) => RectNode;
 
 export const initRectNode: InitRectNode = (
-  init: RectNodeFields,
+  init: InitRectNodeArg,
 ) => new _RectNode({
   camelCaseWrapper: initCamelCaseWrapper(),
   jsxComponentFactory: initJSXComponentFactoryFn(),

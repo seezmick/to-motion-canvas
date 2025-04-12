@@ -1,14 +1,11 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _RectElement, RectElementFields } from './RectElement';
-import { InitRectNode, RectNode, RectNodeFields } from '../../../motionCanvasNodeTree/node/rectNode/RectNode';
-import { Node as MotionCanvasNode } from '../../../motionCanvasNodeTree/node/Node';
 import { Element } from '../Element';
 import { Transformer } from '../../transformer/Transformer';
 import { Position } from '../../../utilities/Position';
 import { InitNumericaExpressionFn, NumericalExpression } from '../../../utilities/numericalExpression/NumericalExpression';
-
-
+import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 
 t.test('constructor correctly assigns props to same-name fields', t => {
   const rects: {
@@ -411,19 +408,12 @@ t.test('constructor correctly assigns props to same-name fields', t => {
     ];
 
   for (let i = 0; i < rects.length; i++) {
-
-    interface InitRectNodeJacket {
-      fn: InitRectNode
-    }
-    const initMotionCanvasRectNodeFnJacket = Substitute.for<InitRectNodeJacket>();
-
     interface InitNumericaExpressionFnJacket {
       fn: InitNumericaExpressionFn
     }
     const initNumericaExpressionJacket = Substitute.for<InitNumericaExpressionFnJacket>();
 
     const rectElement = new _RectElement({
-      initMotionCanvasRectNodeFn: initMotionCanvasRectNodeFnJacket.fn,
       initNumericalExpressionFn: initNumericaExpressionJacket.fn,
     }, rects[i].props);
 
@@ -438,39 +428,51 @@ t.test('constructor correctly assigns props to same-name fields', t => {
   t.end();
 });
 
-t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode', t => {
-  interface InitRectNodeJacket {
-    fn: InitRectNode
-  }
-  const initMotionCanvasRectNodeFnJacket = Substitute.for<InitRectNodeJacket>();
-
+t.test('toMotionCanvasNodesFields correctly translates to MotionCanvasNode', t => {
   const childElement1 = Substitute.for<Element>();
-  const childElement1MotionCanvasNode = Substitute.for<MotionCanvasNode>();
-  childElement1.toMotionCanvasNodes().returns([childElement1MotionCanvasNode]);
+  const childElement1MotionCanvasNodeFields: RectNodeFields = {
+    refName: 'childElement1MotionCanvasNodeFields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement1.toMotionCanvasNodesFields().returns([childElement1MotionCanvasNodeFields]);
 
   const childElement2 = Substitute.for<Element>();
-  const childElement2MotionCanvasNode1 = Substitute.for<MotionCanvasNode>();
-  const childElement2MotionCanvasNode2 = Substitute.for<MotionCanvasNode>();
-  childElement2.toMotionCanvasNodes().returns([childElement2MotionCanvasNode1, childElement2MotionCanvasNode2]);
+  const childElement2MotionCanvasNode1Fields: RectNodeFields = {
+    refName: 'childElement2MotionCanvasNode1Fields',
+    type: 'Rect',
+    children: [],
+  };
+  const childElement2MotionCanvasNode2Fields: RectNodeFields = {
+    refName: 'childElement2MotionCanvasNode2Fields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement2.toMotionCanvasNodesFields().returns([childElement2MotionCanvasNode1Fields, childElement2MotionCanvasNode2Fields]);
 
   const childElement3 = Substitute.for<Element>();
-  const childElement3MotionCanvasNode = Substitute.for<MotionCanvasNode>();
-  childElement3.toMotionCanvasNodes().returns([childElement3MotionCanvasNode]);
+  const childElement3MotionCanvasNodeFields: RectNodeFields = {
+    refName: 'childElement3MotionCanvasNodeFields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement3.toMotionCanvasNodesFields().returns([childElement3MotionCanvasNodeFields]);
 
 
-  const rectNodeFields = {
+  const rectNodeFields: RectNodeFields = {
     refName: "green-fill-and-stroke-rect-x-long-sharp-corners",
+    type: 'Rect',
     width: Substitute.for<NumericalExpression>(),
     height: Substitute.for<NumericalExpression>(),
     topLeft: [Substitute.for<NumericalExpression>(), Substitute.for<NumericalExpression>()],
     fill: "#2ca02c",
     stroke: "#1300ff",
     lineWidth: Substitute.for<NumericalExpression>(),
-    children: [childElement1MotionCanvasNode,
-      childElement2MotionCanvasNode1,
-      childElement2MotionCanvasNode2,
-      childElement3MotionCanvasNode] as MotionCanvasNode[],
-  } as RectNodeFields;
+    children: [childElement1MotionCanvasNodeFields,
+      childElement2MotionCanvasNode1Fields,
+      childElement2MotionCanvasNode2Fields,
+      childElement3MotionCanvasNodeFields],
+  };
 
 
   interface InitNumericaExpressionFnJacket {
@@ -493,14 +495,7 @@ t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode', t => {
     .fn(1.23096)
     .returns(rectNodeFields.lineWidth!);
 
-
-  initMotionCanvasRectNodeFnJacket
-    .fn({ ...rectNodeFields })
-    .returns({ ...rectNodeFields } as RectNode);
-
-
   const rectElement = new _RectElement({
-    initMotionCanvasRectNodeFn: initMotionCanvasRectNodeFnJacket.fn,
     initNumericalExpressionFn: initNumericaExpressionJacket.fn,
   }, {
     "id": "rect1",
@@ -522,8 +517,8 @@ t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode', t => {
     "children": [childElement1, childElement2, childElement3],
   } as RectElementFields);
 
-  const found = rectElement.toMotionCanvasNodes();
-  const wanted = [{ ...rectNodeFields } as RectNode];
+  const found = rectElement.toMotionCanvasNodesFields();
+  const wanted = [{ ...rectNodeFields }];
 
   // start internal test
 
@@ -543,10 +538,6 @@ t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode', t => {
     .received()
     .fn(1.23096);
 
-  initMotionCanvasRectNodeFnJacket
-    .received()
-    .fn({ ...rectNodeFields });
-
   // end internal test
 
   t.same(found, wanted);
@@ -554,39 +545,50 @@ t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode', t => {
   t.end();
 });
 
-
-t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode when there\'s a transformer', t => {
-  interface InitRectNodeJacket {
-    fn: InitRectNode
-  }
-  const initMotionCanvasRectNodeFnJacket = Substitute.for<InitRectNodeJacket>();
-
+t.test('toMotionCanvasNodesFields correctly translates to MotionCanvasNode when there\'s a transformer', t => {
   const childElement1 = Substitute.for<Element>();
-  const childElement1MotionCanvasNode = Substitute.for<MotionCanvasNode>();
-  childElement1.toMotionCanvasNodes().returns([childElement1MotionCanvasNode]);
+  const childElement1MotionCanvasNodeFields: RectNodeFields = {
+    refName: 'childElement1MotionCanvasNodeFields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement1.toMotionCanvasNodesFields().returns([childElement1MotionCanvasNodeFields]);
 
   const childElement2 = Substitute.for<Element>();
-  const childElement2MotionCanvasNode1 = Substitute.for<MotionCanvasNode>();
-  const childElement2MotionCanvasNode2 = Substitute.for<MotionCanvasNode>();
-  childElement2.toMotionCanvasNodes().returns([childElement2MotionCanvasNode1, childElement2MotionCanvasNode2]);
+  const childElement2MotionCanvasNode1Fields: RectNodeFields = {
+    refName: 'childElement2MotionCanvasNode1Fields',
+    type: 'Rect',
+    children: [],
+  };
+  const childElement2MotionCanvasNode2Fields: RectNodeFields = {
+    refName: 'childElement2MotionCanvasNode2Fields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement2.toMotionCanvasNodesFields().returns([childElement2MotionCanvasNode1Fields, childElement2MotionCanvasNode2Fields]);
 
   const childElement3 = Substitute.for<Element>();
-  const childElement3MotionCanvasNode = Substitute.for<MotionCanvasNode>();
-  childElement3.toMotionCanvasNodes().returns([childElement3MotionCanvasNode]);
+  const childElement3MotionCanvasNodeFields: RectNodeFields = {
+    refName: 'childElement3MotionCanvasNodeFields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement3.toMotionCanvasNodesFields().returns([childElement3MotionCanvasNodeFields]);
 
-  const rectNodeFields = {
+  const rectNodeFields: RectNodeFields = {
     refName: "green-fill-and-stroke-rect-x-long-sharp-corners",
+    type: 'Rect',
     width: Substitute.for<NumericalExpression>(),
     height: Substitute.for<NumericalExpression>(),
     topLeft: [Substitute.for<NumericalExpression>(), Substitute.for<NumericalExpression>()],
     fill: "#2ca02c",
     stroke: "#1300ff",
     lineWidth: Substitute.for<NumericalExpression>(),
-    children: [childElement1MotionCanvasNode,
-      childElement2MotionCanvasNode1,
-      childElement2MotionCanvasNode2,
-      childElement3MotionCanvasNode] as MotionCanvasNode[],
-  } as RectNodeFields;
+    children: [childElement1MotionCanvasNodeFields,
+      childElement2MotionCanvasNode1Fields,
+      childElement2MotionCanvasNode2Fields,
+      childElement3MotionCanvasNodeFields],
+  };
 
 
   const transformer = Substitute.for<Transformer>();
@@ -619,13 +621,8 @@ t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode when there\
   }
   const initNumericaExpressionJacket = Substitute.for<InitNumericaExpressionFnJacket>();
 
-  initMotionCanvasRectNodeFnJacket
-    .fn({ ...rectNodeFields, ...transformedRectNodeFields } as RectNodeFields)
-    .returns({ ...rectNodeFields, ...transformedRectNodeFields } as RectNode);
-
 
   const rectElement = new _RectElement({
-    initMotionCanvasRectNodeFn: initMotionCanvasRectNodeFnJacket.fn,
     initNumericalExpressionFn: initNumericaExpressionJacket.fn,
   }, {
     "id": "rect1",
@@ -648,8 +645,8 @@ t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode when there\
     transformer,
   } as RectElementFields);
 
-  const found = rectElement.toMotionCanvasNodes();
-  const wanted = [{ ...rectNodeFields, ...transformedRectNodeFields } as RectNode];
+  const found = rectElement.toMotionCanvasNodesFields();
+  const wanted = [{ ...rectNodeFields, ...transformedRectNodeFields }];
 
   // start internal test
 
@@ -665,10 +662,6 @@ t.test('toMotionCanvasNodes correctly translates to MotionCanvasNode when there\
   transformer
     .received()
     .applyToScalar(1.23096);
-
-  initMotionCanvasRectNodeFnJacket
-    .received()
-    .fn({ ...rectNodeFields, ...transformedRectNodeFields } as RectNode);
 
   // end internal test
 

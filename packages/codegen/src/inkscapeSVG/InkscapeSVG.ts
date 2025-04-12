@@ -1,5 +1,4 @@
-import { initMotionCanvasNodesList, InitMotionCanvasNodesListFn } from '../motionCanvasNodeTree/MotionCanvasNodesList';
-import { initMotionCanvasNodeTree, InitMotionCanvasNodeTreeFn, MotionCanvasNodeTree, MotionCanvasNodeTreeFields } from '../motionCanvasNodeTree/MotionCanvasNodeTree';
+import { MotionCanvasNodeTreeFields } from '../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
 import { Element as InkscapeSVGElement } from './element/Element';
 
 export interface ViewBox {
@@ -17,7 +16,7 @@ export interface InkscapeSVGFields {
 }
 
 export interface InkscapeSVG extends InkscapeSVGFields {
-  toMotionCanvasNodeTree(): MotionCanvasNodeTree;
+  toMotionCanvasNodeTreeFields(): MotionCanvasNodeTreeFields;
 }
 
 export class _InkscapeSVG implements InkscapeSVG {
@@ -33,20 +32,17 @@ export class _InkscapeSVG implements InkscapeSVG {
 
   constructor(
     public deps: {
-      initMotionCanvasNodeTreeFn: InitMotionCanvasNodeTreeFn,
-      initMotionCanvasNodesList: InitMotionCanvasNodesListFn,
     },
     init: InkscapeSVGFields) {
     Object.assign(this, init);
   }
 
-  toMotionCanvasNodeTree(): MotionCanvasNodeTree {
-    return this.deps.initMotionCanvasNodeTreeFn({
-      nodes: this.deps.initMotionCanvasNodesList(
-        this.elements.map(elem => elem.toMotionCanvasNodes()).flat()),
+  toMotionCanvasNodeTreeFields(): MotionCanvasNodeTreeFields {
+    return {
+      nodes: this.elements.map(elem => elem.toMotionCanvasNodesFields()).flat(),
       canvasHeight: this.height,
       canvasWidth: this.width,
-    } satisfies MotionCanvasNodeTreeFields);
+    };
   }
 }
 
@@ -56,7 +52,5 @@ export type InitInkscapeSVGFn = (
 export const initInkscapeSVG: InitInkscapeSVGFn
   = (init: InkscapeSVGFields) =>
     new _InkscapeSVG({
-      initMotionCanvasNodeTreeFn: initMotionCanvasNodeTree,
-      initMotionCanvasNodesList: initMotionCanvasNodesList,
     }, init);
 

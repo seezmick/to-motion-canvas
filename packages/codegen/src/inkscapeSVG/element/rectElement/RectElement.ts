@@ -1,9 +1,9 @@
-import { Node as MotionCanvasNode } from '../../../motionCanvasNodeTree/node/Node';
-import { initRectNode, InitRectNode, RectNodeFields } from '../../../motionCanvasNodeTree/node/rectNode/RectNode';
 import { Element } from '../Element';
 import { Transformer } from '../../transformer/Transformer';
 import { Position } from '../../../utilities/Position';
 import { initNumbericalExpression, InitNumericaExpressionFn, NumericalExpression } from '../../../utilities/numericalExpression/NumericalExpression';
+import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
+import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 
 export interface RectElementFields {
   label?: string;
@@ -58,13 +58,12 @@ export class _RectElement implements RectElement {
   transformer?: Transformer | undefined;
 
   constructor(public deps: {
-    initMotionCanvasRectNodeFn: InitRectNode,
     initNumericalExpressionFn: InitNumericaExpressionFn,
   }, init: RectElementFields) {
     Object.assign(this, init);
   }
 
-  toMotionCanvasNodes(): MotionCanvasNode[] {
+  toMotionCanvasNodesFields(): NodeFields[] {
     const pos = ([]: Position<number>): Position<NumericalExpression> => {
       return this.transformer != undefined
         ? this.transformer.applyToPosition([this.x, this.y])
@@ -81,8 +80,9 @@ export class _RectElement implements RectElement {
         : this.deps.initNumericalExpressionFn(val);
     }
 
-    return [this.deps.initMotionCanvasRectNodeFn({
+    const nodeFields: RectNodeFields = {
       refName: this.label ?? this.id,
+      type: 'Rect',
       width: scalar(this.width),
       height: scalar(this.height),
       topLeft: pos([this.x, this.y]),
@@ -92,9 +92,10 @@ export class _RectElement implements RectElement {
       ...(this.ry != undefined || this.rx != undefined
         ? { radius: scalar(this.ry) ?? scalar(this.rx) }
         : {}),
-      children: this.children.map(child => child.toMotionCanvasNodes()).flat(),
-    } satisfies RectNodeFields,
-    )];
+      children: this.children.map(child => child.toMotionCanvasNodesFields()).flat(),
+    };
+
+    return [nodeFields];
   }
 
 }
@@ -103,6 +104,5 @@ export type InitRectElementFn = (init: RectElementFields) => RectElement;
 
 export const initRectElement: InitRectElementFn
   = (init: RectElementFields) => new _RectElement({
-    initMotionCanvasRectNodeFn: initRectNode,
     initNumericalExpressionFn: initNumbericalExpression,
   }, init);

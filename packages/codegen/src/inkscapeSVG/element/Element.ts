@@ -1,9 +1,9 @@
-import { Node as MotionCanvasNode } from '../../motionCanvasNodeTree/node/Node';
+import { NodeFields } from '../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
 
 export interface Element {
   // an element may translate to 0 to n (where n>1)
   // nodes
-  toMotionCanvasNodes(): MotionCanvasNode[];
+  toMotionCanvasNodesFields(): NodeFields[];
 }
 
 export type InitElementType = () => Element;

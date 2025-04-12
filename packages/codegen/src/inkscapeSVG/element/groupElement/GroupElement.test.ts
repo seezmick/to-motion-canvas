@@ -1,11 +1,10 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _GroupElement, GroupElementFields } from './GroupElement';
-import { InitRectNode, RectNode, RectNodeFields } from '../../../motionCanvasNodeTree/node/rectNode/RectNode';
-import { Node as MotionCanvasNode } from '../../../motionCanvasNodeTree/node/Node';
+import { InitRectNode } from '../../../motionCanvasNodeTree/node/rectNode/RectNode';
 import { Element } from '../Element';
-import { INode } from 'svgson';
-import { GroupElementAttributes } from './GroupElementAttributesSchema';
+import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
 
 t.test('constructor correctly assigns props to same-name fields', t => {
   const props: GroupElementFields[] = [
@@ -31,13 +30,7 @@ t.test('constructor correctly assigns props to same-name fields', t => {
 
   for (let i = 0; i < props.length; i++) {
 
-    interface InitRectNodeJacket {
-      fn: InitRectNode
-    }
-    const initMotionCanvasRectNodeFnJacket = Substitute.for<InitRectNodeJacket>();
-
     const rectElement = new _GroupElement({
-      initMotionCanvasRectNodeFn: initMotionCanvasRectNodeFnJacket.fn,
     }, props[i]);
 
     // all the fields found on `props[i]`
@@ -58,31 +51,46 @@ t.test('toMotionCanvasComponentNode correctly translates to MotionCanvasComponen
   const initMotionCanvasRectNodeFnJacket = Substitute.for<InitRectNodeJacket>();
 
   const childElement1 = Substitute.for<Element>();
-  const childElement1MotionCanvasNode = Substitute.for<MotionCanvasNode>();
-  childElement1.toMotionCanvasNodes().returns([childElement1MotionCanvasNode]);
+  const childElement1MotionCanvasNodeFields: NodeFields = {
+    refName: 'childElement1MotionCanvasNodeFields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement1.toMotionCanvasNodesFields()
+    .returns([childElement1MotionCanvasNodeFields]);
 
   const childElement2 = Substitute.for<Element>();
-  const childElement2MotionCanvasNode = Substitute.for<MotionCanvasNode>();
-  childElement2.toMotionCanvasNodes().returns([childElement2MotionCanvasNode]);
+  const childElement2MotionCanvasNodeFields: NodeFields = {
+    refName: 'childElement2MotionCanvasNodeFields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement2.toMotionCanvasNodesFields()
+    .returns([childElement2MotionCanvasNodeFields]);
 
   const childElement3 = Substitute.for<Element>();
-  const childElement3MotionCanvasNode1 = Substitute.for<MotionCanvasNode>();
-  const childElement3MotionCanvasNode2 = Substitute.for<MotionCanvasNode>();
-  childElement3.toMotionCanvasNodes().returns([childElement3MotionCanvasNode1, childElement3MotionCanvasNode2]);
+  const childElement3MotionCanvasNodeFields: NodeFields = {
+    refName: 'childElement3MotionCanvasNodeFields',
+    type: 'Rect',
+    children: [],
+  };
+  const childElement3MotionCanvasNode2Fields: NodeFields = {
+    refName: 'childElement3MotionCanvasNode2Fields',
+    type: 'Rect',
+    children: [],
+  };
+  childElement3.toMotionCanvasNodesFields()
+    .returns([childElement3MotionCanvasNodeFields, childElement3MotionCanvasNode2Fields]);
 
-  const rectNodeFields = {
+  const rectNodeFields: RectNodeFields = {
     refName: "rect1",
-    children: [childElement1MotionCanvasNode,
-      childElement2MotionCanvasNode,
-      childElement3MotionCanvasNode1,
-      childElement3MotionCanvasNode2,
-    ] as MotionCanvasNode[],
-  } as RectNodeFields;
-
-  initMotionCanvasRectNodeFnJacket
-    .fn({ ...rectNodeFields })
-    .returns({ ...rectNodeFields } as RectNode);
-
+    type: 'Rect',
+    children: [childElement1MotionCanvasNodeFields,
+      childElement2MotionCanvasNodeFields,
+      childElement3MotionCanvasNodeFields,
+      childElement3MotionCanvasNode2Fields,
+    ] as NodeFields[],
+  };
 
   const groupElement = new _GroupElement({
     initMotionCanvasRectNodeFn: initMotionCanvasRectNodeFnJacket.fn,
@@ -91,18 +99,13 @@ t.test('toMotionCanvasComponentNode correctly translates to MotionCanvasComponen
     "children": [childElement1, childElement2, childElement3],
   } as GroupElementFields);
 
-  const found = groupElement.toMotionCanvasNodes();
-  const wanted = [{ ...rectNodeFields } as RectNode];
+  const found = groupElement.toMotionCanvasNodesFields();
+  const wanted = [{ ...rectNodeFields } as RectNodeFields];
 
   // start internal test
-
-  initMotionCanvasRectNodeFnJacket
-    .received()
-    .fn({ ...rectNodeFields });
 
   // end internal test
 
   t.same(found, wanted);
-  t.pass();
   t.end();
 });

@@ -1,6 +1,6 @@
 import t from 'tap';
 import { Arg, Substitute, SubstituteOf } from '@fluffy-spoon/substitute';
-import { RectNode, RectNodeFields, _RectNode } from './RectNode';
+import { RectNode, InitRectNodeArg, _RectNode } from './RectNode';
 import { JSXComponentFactory } from '../jsxComponent/JSXComponentFactory';
 import { PropFactory as JSXComponentPropFactory } from '../jsxComponent/prop/PropFactory';
 import { JSXComponent } from '../jsxComponent/JSXComponent';
@@ -17,8 +17,9 @@ t.test('toJSXComponent correctly builds JSXComponent with no children', t => {
   const jsxComponentPropFactory = Substitute.for<JSXComponentPropFactory>();
   const camelCaseWrapper = Substitute.for<CamelCaseWrapper>();
 
-  const fields: RectNodeFields = {
+  const fields: InitRectNodeArg = {
     refName: 'brown-fill-and-stroke-rect-square-circular',
+    type: 'Rect',
     width: Substitute.for<NumericalExpression>(),
     height: Substitute.for<NumericalExpression>(),
     topLeft: [
@@ -185,8 +186,9 @@ t.test('getReference correctly gives the reference with no children', t => {
     .parse('brown-fill-and-stroke-rect-square-circular')
     .returns('brownFillAndStrokeRectSquareCircular');
 
-  const fields: RectNodeFields = {
+  const fields: InitRectNodeArg = {
     refName: 'brown-fill-and-stroke-rect-square-circular',
+    type: 'Rect',
     width: Substitute.for<NumericalExpression>(),
     height: Substitute.for<NumericalExpression>(),
     topLeft: [
@@ -271,8 +273,9 @@ t.test('getReference correctly gives the reference recursively with children', t
   // done preparing children
 
 
-  const fields: RectNodeFields = {
+  const fields: InitRectNodeArg = {
     refName: 'brown-fill-and-stroke-rect-square-circular',
+    type: 'Rect',
     width: Substitute.for<NumericalExpression>(),
     height: Substitute.for<NumericalExpression>(),
     topLeft: [

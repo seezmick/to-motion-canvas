@@ -7,6 +7,8 @@ import { PathWrapper } from './wrappers/PathWrapper';
 import { InkscapeSVGLoader } from './inkscapeSVG/InkscapeSVGLoader';
 import { InkscapeSVG } from './inkscapeSVG/InkscapeSVG';
 import { MotionCanvasNodeTree } from './motionCanvasNodeTree/MotionCanvasNodeTree';
+import { Factory } from './motionCanvasNodeTree/factory/Factory';
+import { MotionCanvasNodeTreeFields } from './motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
 
 t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each',
   async t => {
@@ -40,7 +42,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       }
     };
 
-
+    const motionCanvasNodeTreeFactory = Substitute.for<Factory>();
     const inkscapeSVGLoader = Substitute.for<InkscapeSVGLoader>();
 
     // start 1
@@ -49,10 +51,19 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       .load("./circles_1920_by_1080.svg")
       .returns(Promise.resolve(inkscapeSVG1));
 
-    const motionCanvasNodeTree1 = Substitute.for<MotionCanvasNodeTree>();
+    const motionCanvasNodeTree1Fields: MotionCanvasNodeTreeFields = {
+      nodes: [],
+      canvasHeight: 1234,
+      canvasWidth: 4567,
+    };
     inkscapeSVG1
-      .toMotionCanvasNodeTree()
-      .returns(motionCanvasNodeTree1);
+      .toMotionCanvasNodeTreeFields()
+      .returns(motionCanvasNodeTree1Fields);
+
+    const motionCanvasNodeTree1 = Substitute.for<MotionCanvasNodeTree>();
+    motionCanvasNodeTreeFactory
+      .init(motionCanvasNodeTree1Fields)
+      .returns(motionCanvasNodeTree1)
 
     motionCanvasNodeTree1
       .generateOutputFiles(config1)
@@ -64,10 +75,19 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       .load("./rects_1920_by_1080.svg")
       .returns(Promise.resolve(inkscapeSVG2));
 
-    const motionCanvasNodeTree2 = Substitute.for<MotionCanvasNodeTree>();
+    const motionCanvasNodeTree2Fields: MotionCanvasNodeTreeFields = {
+      nodes: [],
+      canvasHeight: 4218,
+      canvasWidth: 1111,
+    };
     inkscapeSVG2
-      .toMotionCanvasNodeTree()
-      .returns(motionCanvasNodeTree2);
+      .toMotionCanvasNodeTreeFields()
+      .returns(motionCanvasNodeTree2Fields);
+
+    const motionCanvasNodeTree2 = Substitute.for<MotionCanvasNodeTree>();
+    motionCanvasNodeTreeFactory
+      .init(motionCanvasNodeTree2Fields)
+      .returns(motionCanvasNodeTree2)
 
     motionCanvasNodeTree2
       .generateOutputFiles(config2)
@@ -79,10 +99,20 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       .load("./landing_page_lg.svg")
       .returns(Promise.resolve(inkscapeSVG3));
 
-    const motionCanvasNodeTree3 = Substitute.for<MotionCanvasNodeTree>();
+    const motionCanvasNodeTree3Fields: MotionCanvasNodeTreeFields = {
+      nodes: [],
+      canvasHeight: 4318,
+      canvasWidth: 1111,
+    };
     inkscapeSVG3
-      .toMotionCanvasNodeTree()
-      .returns(motionCanvasNodeTree3);
+      .toMotionCanvasNodeTreeFields()
+      .returns(motionCanvasNodeTree3Fields);
+
+    const motionCanvasNodeTree3 = Substitute.for<MotionCanvasNodeTree>();
+    motionCanvasNodeTreeFactory
+      .init(motionCanvasNodeTree3Fields)
+      .returns(motionCanvasNodeTree3)
+
 
     motionCanvasNodeTree3
       .generateOutputFiles(config3)
@@ -100,6 +130,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
     const svgToMotionCanvasIO = new _InkscapeSVGToMotionCanvasIO({
       pathWrapper: Substitute.for<PathWrapper>(),
       inkscapeSVGLoader,
+      motionCanvasNodeTreeFactory,
     });
 
     await svgToMotionCanvasIO.readTranslateAndWriteAll(mainConfig)
@@ -113,7 +144,11 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
 
     inkscapeSVG1
       .received()
-      .toMotionCanvasNodeTree();
+      .toMotionCanvasNodeTreeFields();
+
+    motionCanvasNodeTreeFactory
+      .received()
+      .init(motionCanvasNodeTree1Fields);
 
     motionCanvasNodeTree1
       .received()
@@ -126,7 +161,11 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
 
     inkscapeSVG2
       .received()
-      .toMotionCanvasNodeTree();
+      .toMotionCanvasNodeTreeFields();
+
+    motionCanvasNodeTreeFactory
+      .received()
+      .init(motionCanvasNodeTree2Fields);
 
     motionCanvasNodeTree2
       .received()
@@ -139,7 +178,11 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
 
     inkscapeSVG3
       .received()
-      .toMotionCanvasNodeTree();
+      .toMotionCanvasNodeTreeFields();
+
+    motionCanvasNodeTreeFactory
+      .received()
+      .init(motionCanvasNodeTree3Fields);
 
     motionCanvasNodeTree3
       .received()
@@ -198,6 +241,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
     .returns('');
 
 
+  const motionCanvasNodeTreeFactory = Substitute.for<Factory>();
   const inkscapeSVGLoader = Substitute.for<InkscapeSVGLoader>();
 
   const inkscapeSVG = Substitute.for<InkscapeSVG>();
@@ -205,10 +249,20 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
     .load("./rects_1920_by_1080.svg")
     .returns(Promise.resolve(inkscapeSVG));
 
-  const newMotionCanvasNodeTree = Substitute.for<MotionCanvasNodeTree>();
+  const motionCanvasNodeTreeFields: MotionCanvasNodeTreeFields = {
+    nodes: [],
+    canvasHeight: 234,
+    canvasWidth: 4567,
+  };
   inkscapeSVG
-    .toMotionCanvasNodeTree()
-    .returns(newMotionCanvasNodeTree);
+    .toMotionCanvasNodeTreeFields()
+    .returns(motionCanvasNodeTreeFields);
+
+  const newMotionCanvasNodeTree = Substitute.for<MotionCanvasNodeTree>();
+  motionCanvasNodeTreeFactory
+    .init(motionCanvasNodeTreeFields)
+    .returns(newMotionCanvasNodeTree)
+
 
   newMotionCanvasNodeTree
     .generateOutputFiles(config2)
@@ -217,6 +271,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
   const svgToMotionCanvasIO = new _InkscapeSVGToMotionCanvasIO({
     pathWrapper,
     inkscapeSVGLoader,
+    motionCanvasNodeTreeFactory,
   });
 
   const callback = svgToMotionCanvasIO.getOnChangeCallbackFn(configs);
@@ -242,7 +297,11 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
 
   inkscapeSVG
     .received()
-    .toMotionCanvasNodeTree();
+    .toMotionCanvasNodeTreeFields();
+
+  motionCanvasNodeTreeFactory
+    .received()
+    .init(motionCanvasNodeTreeFields);
 
   newMotionCanvasNodeTree
     .received()

@@ -1,60 +1,45 @@
 import t from 'tap';
 import { _InkscapeSVG, InkscapeSVGFields, ViewBox } from './InkscapeSVG';
-import { InitMotionCanvasNodeTreeFn, MotionCanvasNodeTree, MotionCanvasNodeTreeFields } from '../motionCanvasNodeTree/MotionCanvasNodeTree';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
-import { _RectElement, RectElementFields } from './element/rectElement/RectElement';
-import { InitMotionCanvasNodesListFn, MotionCanvasNodesList } from '../motionCanvasNodeTree/MotionCanvasNodesList';
-import { InitRectNode, RectNode } from '../motionCanvasNodeTree/node/rectNode/RectNode';
+import { _RectElement } from './element/rectElement/RectElement';
 import { Element } from './element/Element';
-import { Node } from '../motionCanvasNodeTree/node/Node';
-
-
-//const producedMotionCanvasRectNodes = [
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//  Substitute.for<RectNode>(),
-//];
-//
-//const rectInkscapeSVGElements = [
-//  Substitute.for<Element>(),
-//  Substitute.for<Element>(),
-//  Substitute.for<Element>(),
-//  Substitute.for<Element>(),
-//  Substitute.for<Element>(),
-//  Substitute.for<Element>(),
-//  Substitute.for<Element>(),
-//];
-//
+import { RectNodeFields } from '../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { MotionCanvasNodeTreeFields } from '../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
 
 const inkscapeSVGElements = [
   {
     element: Substitute.for<Element>(),
-    motionCanvasNodes: [
-      Substitute.for<RectNode>(),
-      Substitute.for<RectNode>(),
-      Substitute.for<RectNode>(),
-      Substitute.for<RectNode>(),
+    motionCanvasNodesFields: [
+      {
+        refName: 'firstMotionCanvasNodesFields1',
+        type: 'Rect',
+        children: [],
+      } as RectNodeFields,
+      {
+        refName: 'firstMotionCanvasNodesFields2',
+        type: 'Rect',
+        children: [],
+      } as RectNodeFields,
+      {
+        refName: 'firstMotionCanvasNodesFields3',
+        type: 'Rect',
+        children: [],
+      } as RectNodeFields,
+      {
+        refName: 'firstMotionCanvasNodesFields4',
+        type: 'Rect',
+        children: [],
+      } as RectNodeFields,
     ],
   },
   {
     element: Substitute.for<Element>(),
-    motionCanvasNodes: [
-      Substitute.for<RectNode>(),
+    motionCanvasNodesFields: [
+      {
+        refName: 'secondMotionCanvasNodesFields1',
+        type: 'Rect',
+        children: [],
+      } as RectNodeFields,
     ],
   },
 ]
@@ -75,22 +60,7 @@ const rectInkscapeSVG: InkscapeSVGFields = {
 };
 
 t.test('constructor correctly assigns props to same-name fields', t => {
-
-  interface InitMotionCanvasNodeTreeFnJacket {
-    fn: InitMotionCanvasNodeTreeFn
-  }
-  const initMotionCanvasNodeTreeJacket
-    = Substitute.for<InitMotionCanvasNodeTreeFnJacket>();
-
-  interface InitMotionCanvasNodesListFnJacket {
-    fn: InitMotionCanvasNodesListFn
-  }
-  const initMotionCanvasNodesListFnJacket
-    = Substitute.for<InitMotionCanvasNodesListFnJacket>();
-
   const inkscapeSVG = new _InkscapeSVG({
-    initMotionCanvasNodeTreeFn: initMotionCanvasNodeTreeJacket.fn,
-    initMotionCanvasNodesList: initMotionCanvasNodesListFnJacket.fn,
   }, rectInkscapeSVG);
 
   // all the fields found on `rects[i].props`
@@ -102,65 +72,30 @@ t.test('constructor correctly assigns props to same-name fields', t => {
   t.end();
 });
 
-t.test('toMotionCanvasNodeTree correctly creates using initMotionCanvasNodeTreeFn', t => {
+t.test('toMotionCanvasNodeTreeFields correctly creates using initMotionCanvasNodeTreeFn', t => {
   for (let i = 0; i < inkscapeSVGElements.length; i++) {
-    const { element, motionCanvasNodes } = inkscapeSVGElements[i];
+    const { element, motionCanvasNodesFields } = inkscapeSVGElements[i];
     element
-      .toMotionCanvasNodes()
-      .returns(motionCanvasNodes);
+      .toMotionCanvasNodesFields()
+      .returns(motionCanvasNodesFields);
   }
 
-  const producedMotionCanvasNodes: Node[]
-    = inkscapeSVGElements
-      .map(e => e.motionCanvasNodes).flat();
-
-  interface InitMotionCanvasNodeTreeFnJacket {
-    fn: InitMotionCanvasNodeTreeFn
-  }
-  const initMotionCanvasNodeTreeJacket
-    = Substitute.for<InitMotionCanvasNodeTreeFnJacket>();
-
-  interface InitMotionCanvasNodesListFnJacket {
-    fn: InitMotionCanvasNodesListFn
-  }
-  const initMotionCanvasNodesListFnJacket
-    = Substitute.for<InitMotionCanvasNodesListFnJacket>();
-
-  const nodesList = Substitute.for<MotionCanvasNodesList>();
-
-  initMotionCanvasNodesListFnJacket
-    .fn(producedMotionCanvasNodes)
-    .returns(nodesList);
-
-  const motionCanvasNodeTree = Substitute.for<MotionCanvasNodeTree>();
+  const nodes = inkscapeSVGElements.map(elem => elem.motionCanvasNodesFields).flat();
 
   const nodeTreeFields: MotionCanvasNodeTreeFields = {
-    nodes: nodesList,
+    nodes,
     canvasHeight: 1080,
     canvasWidth: 1920,
   };
 
-  initMotionCanvasNodeTreeJacket
-    .fn(nodeTreeFields)
-    .returns(motionCanvasNodeTree);
-
   const inkscapeSVG = new _InkscapeSVG({
-    initMotionCanvasNodeTreeFn: initMotionCanvasNodeTreeJacket.fn,
-    initMotionCanvasNodesList: initMotionCanvasNodesListFnJacket.fn,
   }, rectInkscapeSVG);
 
-  const found = inkscapeSVG.toMotionCanvasNodeTree();
-  const wanted = motionCanvasNodeTree;
+  const found = inkscapeSVG.toMotionCanvasNodeTreeFields();
+  const wanted = nodeTreeFields;
 
   // start testing internal calls
 
-  initMotionCanvasNodesListFnJacket
-    .received()
-    .fn(producedMotionCanvasNodes);
-
-  initMotionCanvasNodeTreeJacket
-    .received()
-    .fn(nodeTreeFields);
 
   // end testing internal calls
 

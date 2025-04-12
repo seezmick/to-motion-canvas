@@ -1,6 +1,7 @@
 import { InkscapeSVGConfig, MainConfig } from "./mainConfig/MainConfigSchema";
 import { initInkscapeSVGLoader, InkscapeSVGLoader } from "./inkscapeSVG/InkscapeSVGLoader";
 import { initPathWrapper, PathWrapper } from "./wrappers/PathWrapper";
+import { initFactory, Factory as NodeTreeFactory } from "./motionCanvasNodeTree/factory/Factory";
 
 export type OnChangeCallbackFn = (path: string) => Promise<void>;
 
@@ -14,6 +15,7 @@ export class _InkscapeSVGToMotionCanvasIO
   constructor(public deps: {
     pathWrapper: PathWrapper,
     inkscapeSVGLoader: InkscapeSVGLoader,
+    motionCanvasNodeTreeFactory: NodeTreeFactory,
   },) {
   }
 
@@ -24,7 +26,9 @@ export class _InkscapeSVGToMotionCanvasIO
 
       const inkscapeSVG = await this.deps.inkscapeSVGLoader.load(inputFilePath);
 
-      const motionCanvasNodeTree = inkscapeSVG.toMotionCanvasNodeTree();
+      const motionCanvasNodeTreeFields = inkscapeSVG.toMotionCanvasNodeTreeFields();
+      const motionCanvasNodeTree = this.deps
+        .motionCanvasNodeTreeFactory.init(motionCanvasNodeTreeFields);
 
       await motionCanvasNodeTree.generateOutputFiles(svgConfig);
     }
@@ -44,7 +48,9 @@ export class _InkscapeSVGToMotionCanvasIO
       const inputFilePath = config.input.filePath;
       const inkscapeSVG = await this.deps.inkscapeSVGLoader.load(inputFilePath);
 
-      const newMotionCanvasNodeTree = inkscapeSVG.toMotionCanvasNodeTree();
+      const motionCanvasNodeTreeFields = inkscapeSVG.toMotionCanvasNodeTreeFields();
+      const newMotionCanvasNodeTree = this.deps
+        .motionCanvasNodeTreeFactory.init(motionCanvasNodeTreeFields);
 
       await newMotionCanvasNodeTree.generateOutputFiles(config);
     };
@@ -59,4 +65,5 @@ export const initInkscapeSVGToMotionCanvasIO:
     new _InkscapeSVGToMotionCanvasIO({
       pathWrapper: initPathWrapper(),
       inkscapeSVGLoader: initInkscapeSVGLoader(),
+      motionCanvasNodeTreeFactory: initFactory(),
     });

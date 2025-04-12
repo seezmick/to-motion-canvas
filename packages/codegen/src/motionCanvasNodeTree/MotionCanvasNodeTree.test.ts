@@ -1,8 +1,7 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
-import { _MotionCanvasNodeTree, MotionCanvasNodeTreeFields } from './MotionCanvasNodeTree';
+import { _MotionCanvasNodeTree, InitMotionCanvasNodeTreeFnArg } from './MotionCanvasNodeTree';
 import { _RectNode } from './node/rectNode/RectNode';
-import { Node as MotionCanvasNode } from './node/Node';
 import { JSXComponent } from './node/jsxComponent/JSXComponent';
 import { MotionCanvasCodeRenderer, NodeReference, OutputFileFields } from './MotionCanvasCodeRenderer';
 import { MotionCanvasNodesList, RenderInfo } from './MotionCanvasNodesList';
@@ -60,7 +59,7 @@ t.test('toFileContentString correctly stringifies', async t => {
 		nodes: nodesList,
 		canvasHeight: 1080,
 		canvasWidth: 1920,
-	} satisfies MotionCanvasNodeTreeFields);
+	} satisfies InitMotionCanvasNodeTreeFnArg);
 
 	await motionCanvasNodeTree.generateOutputFiles({
 		input: {
