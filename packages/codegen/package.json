@@ -1,6 +1,6 @@
 {
   "name": "@to-motion-canvas/codegen",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "bin": "dist/bin.js",
   "scripts": {
     "build": "rm -rf dist && rollup -c",
