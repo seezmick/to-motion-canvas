@@ -1,9 +1,12 @@
 {
   "name": "@to-motion-canvas/utilities",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["./dist/**","*"],
+  "files": [
+    "./dist/**",
+    "*"
+  ],
   "scripts": {
     "build": "rm -rf dist && rollup -c",
     "dev": "rollup -c -w",
