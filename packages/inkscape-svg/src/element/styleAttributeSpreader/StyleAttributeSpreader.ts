@@ -1,5 +1,5 @@
 import { Comment, Declaration } from "inline-style-parser";
-import { initInlineStyleParserWrapper, InlineStyleParserWrapper } from "../../../wrappers/InlineStyleParserWrapper";
+import { initInlineStyleParserWrapper, InlineStyleParserWrapper } from "../../wrappers/InlineStyleParserWrapper";
 
 export interface StyleAttributeSpreader {
   spread(styleLine: string): Record<string, string>;

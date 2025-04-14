@@ -1,5 +1,5 @@
 import { InkscapeSVGConfig, MainConfig } from "./mainConfig/MainConfigSchema";
-import { initInkscapeSVGLoader, InkscapeSVGLoader } from "./inkscapeSVG/InkscapeSVGLoader";
+import { initInkscapeSVGLoader, InkscapeSVGLoader } from "@to-motion-canvas/inkscape-svg";
 import { initPathWrapper, PathWrapper } from "./wrappers/PathWrapper";
 import { initFactory, Factory as NodeTreeFactory } from "./motionCanvasNodeTree/factory/Factory";
 

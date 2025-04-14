@@ -5,7 +5,7 @@ import { Arg, Substitute } from '@fluffy-spoon/substitute';
 //import { InlineStyleParserWrapper } from '../../wrappers/InlineStyleParserWrapper';
 import { Declaration } from 'inline-style-parser';
 import { _StyleAttributeSpreader } from './StyleAttributeSpreader';
-import { InlineStyleParserWrapper } from '../../../wrappers/InlineStyleParserWrapper';
+import { InlineStyleParserWrapper } from '../../wrappers/InlineStyleParserWrapper';
 
 const testData: {
   source: string,

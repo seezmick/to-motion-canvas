@@ -1,6 +1,6 @@
 import { PathLike } from "fs";
 import { InkscapeSVG } from "./InkscapeSVG";
-import { FsWrapper, initFsWrapper } from "../wrappers/FsWrapper";
+import { FsWrapper, initFsWrapper } from "./wrappers/FsWrapper";
 import { initInkscapeSVGParser, InkscapeSVGParser } from "./InkscapeSVGParser";
 
 export interface InkscapeSVGLoader {

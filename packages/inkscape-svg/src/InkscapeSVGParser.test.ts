@@ -1,6 +1,6 @@
 import t from 'tap'
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
-import { SvgsonWrapper } from '../wrappers/SvgsonWrapper';
+import { SvgsonWrapper } from './wrappers/SvgsonWrapper';
 import { InitInkscapeSVGFn, InkscapeSVG, InkscapeSVGFields, ViewBox } from './InkscapeSVG';
 import { InkscapeSVGAttributesSchema } from './InkscapeSVGAttributesSchema';
 import { ElementParserFactory } from './element/ElementParserFactory';

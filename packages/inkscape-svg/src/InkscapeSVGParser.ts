@@ -1,7 +1,7 @@
 import { initInkscapeSVG, InkscapeSVG, InitInkscapeSVGFn, ViewBox } from './InkscapeSVG';
 import { Element as InkscapeSVGElement } from './element/Element';
 import { initInkscapeSVGAttributesSchema, InkscapeSVGAttributesSchema } from './InkscapeSVGAttributesSchema';
-import { initSvgsonWrapper, SvgsonWrapper } from '../wrappers/SvgsonWrapper';
+import { initSvgsonWrapper, SvgsonWrapper } from './wrappers/SvgsonWrapper';
 import { ElementParserFactory, initElementParserFactory } from './element/ElementParserFactory';
 import { INode } from "svgson";
 import { initTransformer, Transformer } from './transformer/Transformer';

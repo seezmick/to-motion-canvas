@@ -13,7 +13,8 @@
   "license": "ISC",
   "workspaces": [
     "packages/codegen",
-    "packages/utilities"
+    "packages/utilities",
+    "packages/inkscape-svg"
   ],
   "devDependencies": {
     "@changesets/cli": "^2.28.1"

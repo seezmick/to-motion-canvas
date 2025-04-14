@@ -1,17 +1,15 @@
 import typescript from '@rollup/plugin-typescript';
-import { preserveShebangs } from 'rollup-plugin-preserve-shebangs';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import sucrase from '@rollup/plugin-sucrase';
 
 export default {
-	input: ['src/bin.ts'],
+	input: ['src/index.ts'],
 	output: {
 		dir: 'dist',
 		format: 'cjs'
 	},
 	external: ['@to-motion-canvas/utilities'],
-	external: ['@to-motion-canvas/inkscape-svg'],
 	plugins: [
 		resolve(), // Resolves node_modules
 		sucrase({
@@ -21,6 +19,5 @@ export default {
 			include: '../../node_modules/**', // Include all modules in node_modules
 		}),
 		typescript(),
-		preserveShebangs(),
 	]
 };
