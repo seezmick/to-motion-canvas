@@ -10,6 +10,7 @@ export default {
 		dir: 'dist',
 		format: 'cjs'
 	},
+	external: ['@to-motion-canvas/utilities'],
 	plugins: [
 		resolve(), // Resolves node_modules
 		sucrase({
