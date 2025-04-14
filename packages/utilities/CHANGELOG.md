@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.6
+
+### Patch Changes
+
+- 044977b: Abstracted new inkscape-svg package out of codegen package
+
 ## 0.0.5
 
 ### Patch Changes
