@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.7
+
+### Patch Changes
+
+- ee12f93: extracted utilities to a package try 3
+
 ## 0.0.6
 
 ### Patch Changes
