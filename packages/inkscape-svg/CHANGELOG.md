@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.3
+
+### Patch Changes
+
+- 0645ffa: assisted with first publish
+
 ## 0.0.2
 
 ### Patch Changes
