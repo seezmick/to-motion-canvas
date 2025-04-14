@@ -1,5 +1,13 @@
 # @to-motion-canvas/codegen
 
+## 0.0.8
+
+### Patch Changes
+
+- 839e2fc: moved -fields interfaces to utilities package
+- Updated dependencies [839e2fc]
+  - @to-motion-canvas/utilities@0.0.5
+
 ## 0.0.7
 
 ### Patch Changes
