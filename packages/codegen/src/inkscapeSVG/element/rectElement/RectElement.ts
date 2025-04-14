@@ -3,7 +3,7 @@ import { Transformer } from '../../transformer/Transformer';
 import {
   initNumericalExpression,
   Position,
-  InitNumericaExpressionFn,
+  InitNumericalExpressionFn,
   NumericalExpression
 } from '@to-motion-canvas/utilities';
 import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
@@ -62,7 +62,7 @@ export class _RectElement implements RectElement {
   transformer?: Transformer | undefined;
 
   constructor(public deps: {
-    initNumericalExpressionFn: InitNumericaExpressionFn,
+    initNumericalExpressionFn: InitNumericalExpressionFn,
   }, init: RectElementFields) {
     Object.assign(this, init);
   }

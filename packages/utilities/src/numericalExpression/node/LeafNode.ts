@@ -1,4 +1,5 @@
-import { _isNumber, _isNumericalExpression, NumberOrNumericalExpression, Operator } from "../NumericalExpression";
+import { _isNumber, _isNumericalExpression, NumberOrNumericalExpression } from "../utils";
+import { Operator } from "../utils";
 import { initContainerNode, InitContainerNodeFn } from "./ContainerNode";
 import { GetStringFnOptions, Node } from "./Node";
 

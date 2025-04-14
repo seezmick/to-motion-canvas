@@ -1,4 +1,4 @@
-import { initNumericalExpression, InitNumericaExpressionFn, NumberOrNumericalExpression, NumericalExpression } from '@to-motion-canvas/utilities';
+import { initNumericalExpression, InitNumericalExpressionFn, NumberOrNumericalExpression, NumericalExpression } from '@to-motion-canvas/utilities';
 import { Position } from '@to-motion-canvas/utilities';
 import { Options, TransformDefinition } from "../TransformDefinition";
 

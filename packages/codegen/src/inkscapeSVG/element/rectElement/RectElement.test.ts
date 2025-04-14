@@ -4,7 +4,7 @@ import { _RectElement, RectElementFields } from './RectElement';
 import { Element } from '../Element';
 import { Transformer } from '../../transformer/Transformer';
 import { Position } from '@to-motion-canvas/utilities';
-import { InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
+import { InitNumericalExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
 import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
 
 t.test('constructor correctly assigns props to same-name fields', t => {
@@ -408,10 +408,10 @@ t.test('constructor correctly assigns props to same-name fields', t => {
     ];
 
   for (let i = 0; i < rects.length; i++) {
-    interface InitNumericaExpressionFnJacket {
-      fn: InitNumericaExpressionFn
+    interface InitNumericalExpressionFnJacket {
+      fn: InitNumericalExpressionFn
     }
-    const initNumericaExpressionJacket = Substitute.for<InitNumericaExpressionFnJacket>();
+    const initNumericaExpressionJacket = Substitute.for<InitNumericalExpressionFnJacket>();
 
     const rectElement = new _RectElement({
       initNumericalExpressionFn: initNumericaExpressionJacket.fn,
@@ -475,10 +475,10 @@ t.test('toMotionCanvasNodesFields correctly translates to MotionCanvasNode', t =
   };
 
 
-  interface InitNumericaExpressionFnJacket {
-    fn: InitNumericaExpressionFn
+  interface InitNumericalExpressionFnJacket {
+    fn: InitNumericalExpressionFn
   }
-  const initNumericaExpressionJacket = Substitute.for<InitNumericaExpressionFnJacket>();
+  const initNumericaExpressionJacket = Substitute.for<InitNumericalExpressionFnJacket>();
   initNumericaExpressionJacket
     .fn(82.803673)
     .returns(rectNodeFields.width!);
@@ -616,10 +616,10 @@ t.test('toMotionCanvasNodesFields correctly translates to MotionCanvasNode when 
     .applyToScalar(1.23096)
     .returns(transformedRectNodeFields.lineWidth!);
 
-  interface InitNumericaExpressionFnJacket {
-    fn: InitNumericaExpressionFn
+  interface InitNumericalExpressionFnJacket {
+    fn: InitNumericalExpressionFn
   }
-  const initNumericaExpressionJacket = Substitute.for<InitNumericaExpressionFnJacket>();
+  const initNumericaExpressionJacket = Substitute.for<InitNumericalExpressionFnJacket>();
 
 
   const rectElement = new _RectElement({

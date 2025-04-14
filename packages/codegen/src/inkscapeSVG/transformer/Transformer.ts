@@ -1,4 +1,4 @@
-import { initNumericalExpression, InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
+import { initNumericalExpression, InitNumericalExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
 import { Position } from '@to-motion-canvas/utilities';
 import {
   initTransformAttributeParser, TransformAttributeParser
@@ -22,7 +22,7 @@ export interface Transformer {
 export class _Transformer implements Transformer {
   constructor(public deps: {
     transformAttributeParser: TransformAttributeParser,
-    initNumericalExpressionFn: InitNumericaExpressionFn,
+    initNumericalExpressionFn: InitNumericalExpressionFn,
     initTranslateFn: InitTranslateFn,
     initScaleFn: InitScaleFn,
   }, public definitions: TransformDefinition[] = [],

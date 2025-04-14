@@ -1,4 +1,5 @@
-import { _NumericalExpression, Operator } from "../NumericalExpression";
+import { _NumericalExpression } from "../NumericalExpression";
+import { Operator } from "../utils";
 
 export interface GetStringFnOptions {
   excludeBrackets?: boolean;

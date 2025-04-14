@@ -1,9 +1,12 @@
 export {
-	Operator,
 	NumericalExpression,
-	InitNumericaExpressionFn,
+	InitNumericalExpressionFn,
 	initNumericalExpression,
-	NumberOrNumericalExpression,
 } from "./numericalExpression/NumericalExpression";
+
+export {
+	Operator,
+	NumberOrNumericalExpression,
+} from "./numericalExpression/utils";
 
 export { Position } from "./Position";

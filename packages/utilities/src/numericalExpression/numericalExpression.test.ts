@@ -1,8 +1,9 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
-import { _NumericalExpression, NumericalExpression, Operator } from './NumericalExpression';
+import { _NumericalExpression, NumericalExpression } from './NumericalExpression';
 import { _ContainerNode, initContainerNode, InitContainerNodeFn } from './node/ContainerNode';
 import { _LeafNode, initLeafNode, InitLeafNodeFn } from './node/LeafNode';
+import { Operator } from './utils';
 
 t.test('toString method works', t => {
   const deps = {

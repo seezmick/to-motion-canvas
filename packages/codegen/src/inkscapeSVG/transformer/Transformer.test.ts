@@ -4,13 +4,13 @@ import { _Transformer, AddForUserlandConversionFnArgs } from './Transformer';
 import { TransformAttributeParser } from './TransformAttributeParser';
 import { TransformDefinition } from './transformDefinition/TransformDefinition';
 import { Position } from '@to-motion-canvas/utilities';
-import { InitNumericaExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
+import { InitNumericalExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
 import { InitTranslateFn } from './transformDefinition/translate/Translate';
 import { InitScaleFn } from './transformDefinition/scale/Scale';
 
 t.test('addFromTransformAttribute works', t => {
   const transformAttributeParser = Substitute.for<TransformAttributeParser>();
-  const initNumericalExpressionFn = Substitute.for<InitNumericaExpressionFn>();
+  const initNumericalExpressionFn = Substitute.for<InitNumericalExpressionFn>();
 
   interface InitTranslateFnJacket {
     fn: InitTranslateFn
@@ -60,11 +60,11 @@ t.test('addFromTransformAttribute works', t => {
 t.test('addForUserlandConversion works', t => {
   const transformAttributeParser = Substitute.for<TransformAttributeParser>();
 
-  interface InitNumericaExpressionFnJacket {
-    fn: InitNumericaExpressionFn
+  interface InitNumericalExpressionFnJacket {
+    fn: InitNumericalExpressionFn
   }
   const initNumericalExpressionFnJacket
-    = Substitute.for<InitNumericaExpressionFnJacket>();
+    = Substitute.for<InitNumericalExpressionFnJacket>();
 
   interface InitTranslateFnJacket {
     fn: InitTranslateFn
@@ -200,11 +200,11 @@ t.test('applyToPosition works', t => {
   }
   const initScaleFnJacket = Substitute.for<InitScaleFnJacket>();
 
-  interface InitNumericaExpressionFnJacket {
-    fn: InitNumericaExpressionFn
+  interface InitNumericalExpressionFnJacket {
+    fn: InitNumericalExpressionFn
   }
   const initNumericalExpressionFnJacket
-    = Substitute.for<InitNumericaExpressionFnJacket>();
+    = Substitute.for<InitNumericalExpressionFnJacket>();
 
   const positionStart: Position<number> = [1, 2];
   const positionSteps: Position<NumericalExpression>[] = [
@@ -306,11 +306,11 @@ t.test('applyToScalar works', t => {
   const initScaleFnJacket = Substitute.for<InitScaleFnJacket>();
 
 
-  interface InitNumericaExpressionFnJacket {
-    fn: InitNumericaExpressionFn
+  interface InitNumericalExpressionFnJacket {
+    fn: InitNumericalExpressionFn
   }
   const initNumericalExpressionFnJacket
-    = Substitute.for<InitNumericaExpressionFnJacket>();
+    = Substitute.for<InitNumericalExpressionFnJacket>();
 
   const scalarStart: number = -23;
   const scalarSteps: NumericalExpression[] = [

@@ -1,28 +1,8 @@
 import { initContainerNode, InitContainerNodeFn } from "./node/ContainerNode";
 import { Node } from "./node/Node";
 import { initLeafNode, InitLeafNodeFn } from "./node/LeafNode";
-
-export type NumberOrNumericalExpression = NumericalExpression | number;
-
-export function _isNumericalExpression(
-  subject: NumberOrNumericalExpression
-): subject is NumericalExpression {
-  return Number.isNaN(Number(subject));
-}
-
-export function _isNumber(
-  subject: NumberOrNumericalExpression
-): subject is number {
-  return !Number.isNaN(Number(subject));
-}
-
-export enum Operator {
-  Add,
-  Subtract,
-  Multiply,
-  Divide,
-  FirstTerm,
-}
+import { _isNumber, _isNumericalExpression, Operator } from "./utils";
+import { NumberOrNumericalExpression } from "./utils";
 
 // This class exists because the result of this
 // library is code that will be processed on a higher
@@ -128,12 +108,10 @@ export class _NumericalExpression implements NumericalExpression {
   }
 }
 
-// TODO: correct name to InitNumericalExpressionFn
-export type InitNumericaExpressionFn
+export type InitNumericalExpressionFn
   = (value: NumberOrNumericalExpression) => NumericalExpression;
 
-// TODO: correct name to InitNumericalExpression
-export const initNumericalExpression: InitNumericaExpressionFn
+export const initNumericalExpression: InitNumericalExpressionFn
   = (value: NumberOrNumericalExpression) => new _NumericalExpression({
     initContainerNodeFn: initContainerNode,
     initLeafNodeFn: initLeafNode,

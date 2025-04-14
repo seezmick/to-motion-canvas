@@ -1,5 +1,5 @@
 import { GetStringFnOptions, Node } from "./Node";
-import { Operator } from "../NumericalExpression";
+import { Operator } from "../utils";
 
 export class _ContainerNode implements Node {
   constructor(public deps: {
