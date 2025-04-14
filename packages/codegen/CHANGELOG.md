@@ -1,5 +1,13 @@
 # @to-motion-canvas/codegen
 
+## 0.0.6
+
+### Patch Changes
+
+- 44b635d: extracted utilities to a package try 2
+- Updated dependencies [44b635d]
+  - @to-motion-canvas/utilities@0.0.3
+
 ## 0.0.5
 
 ### Patch Changes
