@@ -1,5 +1,5 @@
-import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
-import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { NodeFields } from '@to-motion-canvas/utilities';
+import { RectNodeFields } from '@to-motion-canvas/utilities';
 import { Element } from '../Element';
 
 export interface GroupElementFields {

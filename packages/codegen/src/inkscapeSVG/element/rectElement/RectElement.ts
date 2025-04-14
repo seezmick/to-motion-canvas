@@ -6,8 +6,8 @@ import {
   InitNumericalExpressionFn,
   NumericalExpression
 } from '@to-motion-canvas/utilities';
-import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
-import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { NodeFields } from '@to-motion-canvas/utilities';
+import { RectNodeFields } from '@to-motion-canvas/utilities';
 
 export interface RectElementFields {
   label?: string;

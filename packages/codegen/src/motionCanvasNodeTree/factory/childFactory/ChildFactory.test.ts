@@ -2,7 +2,7 @@ import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { InitRectNode, RectNode, InitRectNodeArg } from "../../node/rectNode/RectNode";
 import { _ChildFactory } from "./ChildFactory";
-import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { RectNodeFields } from '@to-motion-canvas/utilities';
 import { NumericalExpression } from '@to-motion-canvas/utilities';
 
 t.test('init works', t => {

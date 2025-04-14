@@ -1,4 +1,4 @@
-import { NodeFields } from "../../../motionCanvasNodeTreeFields/nodeFields/NodeFields";
+import { NodeFields } from "@to-motion-canvas/utilities";
 import { Node } from "../../node/Node";
 import { initRectNode, InitRectNode, InitRectNodeArg } from "../../node/rectNode/RectNode";
 

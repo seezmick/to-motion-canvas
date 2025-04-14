@@ -3,8 +3,8 @@ import { _InkscapeSVG, InkscapeSVGFields, ViewBox } from './InkscapeSVG';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _RectElement } from './element/rectElement/RectElement';
 import { Element } from './element/Element';
-import { RectNodeFields } from '../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
-import { MotionCanvasNodeTreeFields } from '../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
+import { RectNodeFields } from '@to-motion-canvas/utilities';
+import { MotionCanvasNodeTreeFields } from '@to-motion-canvas/utilities';
 
 const inkscapeSVGElements = [
   {

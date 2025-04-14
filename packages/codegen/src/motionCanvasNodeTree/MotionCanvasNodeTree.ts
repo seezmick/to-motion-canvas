@@ -1,5 +1,5 @@
 import { InkscapeSVGConfig } from '../mainConfig/MainConfigSchema';
-import { MotionCanvasNodeTreeFieldsWithChildType } from '../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
+import { MotionCanvasNodeTreeFieldsWithChildType } from '@to-motion-canvas/utilities';
 import { FsWrapper, initFsWrapper } from '../wrappers/FsWrapper';
 import { initMotionCanvasCodeRenderer, MotionCanvasCodeRenderer, OutputFileFields } from './MotionCanvasCodeRenderer';
 import { MotionCanvasNodesList } from './MotionCanvasNodesList';

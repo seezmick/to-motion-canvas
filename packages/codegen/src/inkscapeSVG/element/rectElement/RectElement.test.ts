@@ -5,7 +5,7 @@ import { Element } from '../Element';
 import { Transformer } from '../../transformer/Transformer';
 import { Position } from '@to-motion-canvas/utilities';
 import { InitNumericalExpressionFn, NumericalExpression } from '@to-motion-canvas/utilities';
-import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { RectNodeFields } from '@to-motion-canvas/utilities';
 
 t.test('constructor correctly assigns props to same-name fields', t => {
   const rects: {

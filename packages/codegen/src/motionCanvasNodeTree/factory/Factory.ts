@@ -1,4 +1,4 @@
-import { MotionCanvasNodeTreeFields } from "../../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields";
+import { MotionCanvasNodeTreeFields } from "@to-motion-canvas/utilities";
 import { initMotionCanvasNodesList, InitMotionCanvasNodesListFn, } from "../MotionCanvasNodesList";
 import { initMotionCanvasNodeTree, InitMotionCanvasNodeTreeFn, MotionCanvasNodeTree } from "../MotionCanvasNodeTree";
 import { ChildFactory, initChildFactory } from "./childFactory/ChildFactory";

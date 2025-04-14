@@ -1,5 +1,5 @@
-import { Position } from '@to-motion-canvas/utilities';
-import { NumericalExpression } from '@to-motion-canvas/utilities';
+import { Position } from '../../Position';
+import { NumericalExpression } from '../../numericalExpression/NumericalExpression';
 import { NodeFields, NodeFieldsWithChildType } from './NodeFields';
 
 export interface RectNodeFieldsWithChildType<T>

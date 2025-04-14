@@ -4,9 +4,9 @@ import { InitMotionCanvasNodesListFn, MotionCanvasNodesList, } from "../MotionCa
 import { InitMotionCanvasNodeTreeFn, MotionCanvasNodeTree } from "../MotionCanvasNodeTree";
 import { ChildFactory } from "./childFactory/ChildFactory";
 import { _Factory } from "./Factory";
-import { MotionCanvasNodeTreeFields } from '../../motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
+import { MotionCanvasNodeTreeFields } from '@to-motion-canvas/utilities';
 import { NumericalExpression } from '@to-motion-canvas/utilities';
-import { RectNodeFields } from '../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
+import { RectNodeFields } from '@to-motion-canvas/utilities';
 import { Node } from '../node/Node';
 
 t.test('init works', t => {

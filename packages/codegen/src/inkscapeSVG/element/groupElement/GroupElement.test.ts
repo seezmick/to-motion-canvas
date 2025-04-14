@@ -3,8 +3,8 @@ import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _GroupElement, GroupElementFields } from './GroupElement';
 import { InitRectNode } from '../../../motionCanvasNodeTree/node/rectNode/RectNode';
 import { Element } from '../Element';
-import { RectNodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
-import { NodeFields } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
+import { RectNodeFields } from '@to-motion-canvas/utilities';
+import { NodeFields } from '@to-motion-canvas/utilities';
 
 t.test('constructor correctly assigns props to same-name fields', t => {
   const props: GroupElementFields[] = [

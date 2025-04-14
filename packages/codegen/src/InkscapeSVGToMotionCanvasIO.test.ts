@@ -8,7 +8,7 @@ import { InkscapeSVGLoader } from './inkscapeSVG/InkscapeSVGLoader';
 import { InkscapeSVG } from './inkscapeSVG/InkscapeSVG';
 import { MotionCanvasNodeTree } from './motionCanvasNodeTree/MotionCanvasNodeTree';
 import { Factory } from './motionCanvasNodeTree/factory/Factory';
-import { MotionCanvasNodeTreeFields } from './motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields';
+import { MotionCanvasNodeTreeFields } from '@to-motion-canvas/utilities';
 
 t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each',
   async t => {

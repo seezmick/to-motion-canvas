@@ -7,8 +7,8 @@ import { CamelCaseWrapper, initCamelCaseWrapper } from '../../../wrappers/CamelC
 import { NodeReference } from '../../MotionCanvasCodeRenderer';
 import { Position } from '@to-motion-canvas/utilities';
 import { NumericalExpression } from '@to-motion-canvas/utilities';
-import { RectNodeFieldsWithChildType } from '../../../motionCanvasNodeTreeFields/nodeFields/RectNodeFields';
-import { NodeTypes } from '../../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
+import { RectNodeFieldsWithChildType } from '@to-motion-canvas/utilities';
+import { NodeTypes } from '@to-motion-canvas/utilities';
 
 export interface InitRectNodeArg
   extends RectNodeFieldsWithChildType<MotionCanvasNode[]> { }

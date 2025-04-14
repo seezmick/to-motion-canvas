@@ -1,4 +1,4 @@
-import { NodeFields } from '../../motionCanvasNodeTreeFields/nodeFields/NodeFields';
+import { NodeFields } from '@to-motion-canvas/utilities';
 
 export interface Element {
   // an element may translate to 0 to n (where n>1)
