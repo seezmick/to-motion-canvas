@@ -20,7 +20,7 @@ export class _Main implements Main {
     await this.deps.inkscapeSVGToMotionCanvasIO
       .readTranslateAndWriteAll(config);
 
-    const inputFilePaths = config.inkscapeSVGs
+    const inputFilePaths = config.vectorImages
       .map(svg => svg.input.filePath);
 
     const watcher = this.deps.chokidar
@@ -30,7 +30,7 @@ export class _Main implements Main {
 
     watcher.on('change',
       this.deps.inkscapeSVGToMotionCanvasIO
-        .getOnChangeCallbackFn(config.inkscapeSVGs));
+        .getOnChangeCallbackFn(config.vectorImages));
   }
 }
 

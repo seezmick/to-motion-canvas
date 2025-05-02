@@ -13,7 +13,7 @@ t.test('run runs right!', async t => {
   const chokidar = Substitute.for<ChokidarWrapper>();
 
   const mainConfig: MainConfig = {
-    inkscapeSVGs: [
+    vectorImages: [
       {
         input: {
           filePath: "./circles_1920_by_1080.svg",
@@ -66,7 +66,7 @@ t.test('run runs right!', async t => {
   const onChangeCallback: OnChangeCallbackFn = (_) => Promise.resolve();
 
   inkscapeSVGToMotionCanvasIO
-    .getOnChangeCallbackFn(mainConfig.inkscapeSVGs)
+    .getOnChangeCallbackFn(mainConfig.vectorImages)
     .returns(onChangeCallback);
 
   const main = new _Main({

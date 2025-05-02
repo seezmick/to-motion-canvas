@@ -14,7 +14,7 @@ t.test('load loads the main config correctly', async t => {
     .returns(Promise.resolve('tomlContent: "example"'));
 
   const mainConfig = {
-    inkscapeSVGs: [
+    vectorImages: [
       {
         input: {
           filePath: "./circles_1920_by_1080.svg",

@@ -9,23 +9,23 @@ t.test('parse correctly parses a MainConfig', t => {
   const mainConfigSchema = Substitute.for<MainConfigSchema>();
 
   const sourceStr = `
-[[inkscapeSVGs]]
-[inkscapeSVGs.input]
+[[vectorImages]]
+[vectorImages.input]
 filePath= "./rects_1920_by_1080.svg"
-[inkscapeSVGs.output]
+[vectorImages.output]
 viewAdderFunctionName= "rects1920By1080"
 directoryPath= "./src/inkscapeSVGGenerated"
 
-[[inkscapeSVGs]]
-[inkscapeSVGs.input]
+[[vectorImages]]
+[vectorImages.input]
 filePath= "./circles_1920_by_1080.svg"
-[inkscapeSVGs.output]
+[vectorImages.output]
 viewAdderFunctionName= "circles1920By1080"
 directoryPath= "./src/inkscapeSVGGenerated"
 `;
 
   const mainConfig = {
-    inkscapeSVGs: [
+    vectorImages: [
       {
         input: {
           filePath: "./circles_1920_by_1080.svg",

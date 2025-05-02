@@ -120,7 +120,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
     // end 3
 
     const mainConfig: MainConfig = {
-      inkscapeSVGs: [
+      vectorImages: [
         config1,
         config2,
         config3,

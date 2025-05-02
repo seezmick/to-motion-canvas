@@ -21,7 +21,7 @@ export class _InkscapeSVGToMotionCanvasIO
 
   async readTranslateAndWriteAll(config: MainConfig):
     Promise<void> {
-    for (const svgConfig of config.inkscapeSVGs) {
+    for (const svgConfig of config.vectorImages) {
       const inputFilePath = svgConfig.input.filePath;
 
       const inkscapeSVG = await this.deps.inkscapeSVGLoader.load(inputFilePath);
