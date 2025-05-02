@@ -5,7 +5,7 @@ t.test('parse correctly parses a MainConfig', t => {
   const mainConfigSchema = new _MainConfigSchema();
 
   const mainConfig = {
-    inkscapeSVGs: [
+    vectorImages: [
       {
         input: {
           filePath: "./circles_1920_by_1080.svg",

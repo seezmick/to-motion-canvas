@@ -1,7 +1,7 @@
 import myzod, { Infer } from 'myzod';
 import { ObjectOptions, PathOptions } from 'myzod/libs/types';
 
-const inkscapeSVGSchema = myzod.object({
+const vectorImageSchema = myzod.object({
   input: myzod.object({
     filePath: myzod.string()
       .withPredicate(value => /^(.+)\/([^\/]+)\.svg$/gm.test(value),
@@ -18,10 +18,10 @@ const inkscapeSVGSchema = myzod.object({
 });
 
 const mainConfigSchema = myzod.object({
-  inkscapeSVGs: myzod.array(inkscapeSVGSchema),
+  vectorImages: myzod.array(vectorImageSchema),
 });
 
-export type InkscapeSVGConfig = Infer<typeof inkscapeSVGSchema>;
+export type InkscapeSVGConfig = Infer<typeof vectorImageSchema>;
 export type MainConfig = Infer<typeof mainConfigSchema>;
 
 export interface MainConfigSchema {
