@@ -45,7 +45,7 @@ t.test('run runs right!', async t => {
   };
 
   mainConfigLoader
-    .load('inkscapeSVGToMotionCanvasConfig.toml')
+    .load('toMotionCanvasConfig.toml')
     .returns(Promise.resolve({ ...mainConfig } as MainConfig));
 
   inkscapeSVGToMotionCanvasIO
@@ -81,7 +81,7 @@ t.test('run runs right!', async t => {
 
   mainConfigLoader
     .received()
-    .load('inkscapeSVGToMotionCanvasConfig.toml');
+    .load('toMotionCanvasConfig.toml');
 
   inkscapeSVGToMotionCanvasIO
     .received()

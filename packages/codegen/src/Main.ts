@@ -15,8 +15,7 @@ export class _Main implements Main {
 
   async run(): Promise<void> {
     const config = await this.deps.mainConfigLoader
-      // TODO: change to svgToMotionCanvasConfig.toml
-      .load(`inkscapeSVGToMotionCanvasConfig.toml`);
+      .load(`toMotionCanvasConfig.toml`);
 
     await this.deps.inkscapeSVGToMotionCanvasIO
       .readTranslateAndWriteAll(config);
