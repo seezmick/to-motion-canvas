@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.11
+
+### Patch Changes
+
+- 0857823: updated the main config's formatting
+
 ## 0.0.10
 
 ### Patch Changes
