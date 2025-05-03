@@ -2,7 +2,7 @@ import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { _VectorImageToMotionCanvasIO } from './VectorImageToMotionCanvasIO';
 import { FsWrapper } from '../wrappers/FsWrapper';
-import { InkscapeSVGConfig, MainConfig } from '../mainConfig/MainConfigSchema';
+import { VectorImageConfig, MainConfig } from '../mainConfig/MainConfigSchema';
 import { PathWrapper } from '../wrappers/PathWrapper';
 import { VectorImageLoader } from './VectorImageLoader';
 import { VectorImage } from '@to-motion-canvas/utilities';
@@ -10,9 +10,9 @@ import { MotionCanvasNodeTree } from '../motionCanvasNodeTree/MotionCanvasNodeTr
 import { Factory } from '../motionCanvasNodeTree/factory/Factory';
 import { MotionCanvasNodeTreeFields } from '@to-motion-canvas/utilities';
 
-t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each',
+t.test('readTranslateAndWriteAll reads VectorImages, translates, and writes each',
   async t => {
-    const config1: InkscapeSVGConfig = {
+    const config1: VectorImageConfig = {
       input: {
         filePath: "./circles_1920_by_1080.svg",
       },
@@ -22,7 +22,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       }
     };
 
-    const config2: InkscapeSVGConfig = {
+    const config2: VectorImageConfig = {
       input: {
         filePath: "./rects_1920_by_1080.svg",
       },
@@ -32,7 +32,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       }
     }
 
-    const config3: InkscapeSVGConfig = {
+    const config3: VectorImageConfig = {
       input: {
         filePath: "./landing_page_lg.svg",
       },
@@ -194,7 +194,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
   });
 
 t.test('getOnChangeCallback gives a function with the right behaviour', async t => {
-  const config1: InkscapeSVGConfig = {
+  const config1: VectorImageConfig = {
     input: {
       filePath: "./circles_1920_by_1080.svg",
     },
@@ -204,7 +204,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
     }
   };
 
-  const config2: InkscapeSVGConfig = {
+  const config2: VectorImageConfig = {
     input: {
       filePath: "./rects_1920_by_1080.svg",
     },
@@ -214,7 +214,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
     }
   }
 
-  const config3: InkscapeSVGConfig = {
+  const config3: VectorImageConfig = {
     input: {
       filePath: "./landing_page_lg.svg",
     },

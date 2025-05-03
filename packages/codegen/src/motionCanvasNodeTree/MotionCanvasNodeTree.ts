@@ -1,4 +1,4 @@
-import { InkscapeSVGConfig } from '../mainConfig/MainConfigSchema';
+import { VectorImageConfig } from '../mainConfig/MainConfigSchema';
 import { MotionCanvasNodeTreeFieldsWithChildType } from '@to-motion-canvas/utilities';
 import { FsWrapper, initFsWrapper } from '../wrappers/FsWrapper';
 import { initMotionCanvasCodeRenderer, MotionCanvasCodeRenderer, OutputFileFields } from './MotionCanvasCodeRenderer';
@@ -8,7 +8,7 @@ export interface InitMotionCanvasNodeTreeFnArg
 	extends MotionCanvasNodeTreeFieldsWithChildType<MotionCanvasNodesList> { }
 
 export interface MotionCanvasNodeTree {
-	generateOutputFiles(config: InkscapeSVGConfig): Promise<void>;
+	generateOutputFiles(config: VectorImageConfig): Promise<void>;
 }
 
 export class _MotionCanvasNodeTree
@@ -25,8 +25,8 @@ export class _MotionCanvasNodeTree
 		this.nodes = fields.nodes;
 	}
 
-	//generate(config: InkscapeSVGConfig): Promise<void> {
-	async generateOutputFiles(config: InkscapeSVGConfig): Promise<void> {
+	//generate(config: VectorImageConfig): Promise<void> {
+	async generateOutputFiles(config: VectorImageConfig): Promise<void> {
 		const viewAdderFunctionName
 			= config.output.viewAdderFunctionName;
 

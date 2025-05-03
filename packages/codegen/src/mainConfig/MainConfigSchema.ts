@@ -34,7 +34,7 @@ const mainConfigSchema = myzod.object({
 
 export type CustomComponentImportPaths = Infer<typeof customComponentImportPathsSchema>;
 // TODO: rename to VectorImageConfig
-export type InkscapeSVGConfig = Infer<typeof vectorImageSchema>;
+export type VectorImageConfig = Infer<typeof vectorImageSchema>;
 export type MainConfig = Infer<typeof mainConfigSchema>;
 
 export interface MainConfigSchema {

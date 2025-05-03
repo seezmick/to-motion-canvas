@@ -1,4 +1,4 @@
-import { InkscapeSVGConfig, MainConfig } from "../mainConfig/MainConfigSchema";
+import { VectorImageConfig, MainConfig } from "../mainConfig/MainConfigSchema";
 import { initVectorImageLoader, VectorImageLoader } from "./VectorImageLoader";
 import { initPathWrapper, PathWrapper } from "../wrappers/PathWrapper";
 import { initFactory, Factory as NodeTreeFactory } from "../motionCanvasNodeTree/factory/Factory";
@@ -7,7 +7,7 @@ export type OnChangeCallbackFn = (path: string) => Promise<void>;
 
 export interface VectorImageToMotionCanvasIO {
   readTranslateAndWriteAll(config: MainConfig): Promise<void>;
-  getOnChangeCallbackFn(configs: InkscapeSVGConfig[]): OnChangeCallbackFn;
+  getOnChangeCallbackFn(configs: VectorImageConfig[]): OnChangeCallbackFn;
 }
 
 export class _VectorImageToMotionCanvasIO
@@ -34,7 +34,7 @@ export class _VectorImageToMotionCanvasIO
     }
   }
 
-  getOnChangeCallbackFn(configs: InkscapeSVGConfig[]): OnChangeCallbackFn {
+  getOnChangeCallbackFn(configs: VectorImageConfig[]): OnChangeCallbackFn {
     return async (path: string) => {
       const config = configs
         .find(config => {

@@ -5,7 +5,7 @@ import { _RectNode } from './node/rectNode/RectNode';
 import { JSXComponent } from './node/jsxComponent/JSXComponent';
 import { MotionCanvasCodeRenderer, NodeReference, OutputFileFields } from './MotionCanvasCodeRenderer';
 import { MotionCanvasNodesList, RenderInfo } from './MotionCanvasNodesList';
-import { InkscapeSVGConfig } from '../mainConfig/MainConfigSchema';
+import { VectorImageConfig } from '../mainConfig/MainConfigSchema';
 import { FsWrapper } from '../wrappers/FsWrapper';
 
 t.test('toFileContentString correctly stringifies', async t => {
@@ -38,7 +38,7 @@ t.test('toFileContentString correctly stringifies', async t => {
 
 	const codeRenderer = Substitute.for<MotionCanvasCodeRenderer>();
 
-	const config: InkscapeSVGConfig = {
+	const config: VectorImageConfig = {
 		input: {
 			filePath: "./landing_page_lg.svg",
 		},
