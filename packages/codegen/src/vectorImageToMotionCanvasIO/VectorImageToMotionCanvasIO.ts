@@ -1,17 +1,17 @@
-import { InkscapeSVGConfig, MainConfig } from "./mainConfig/MainConfigSchema";
+import { InkscapeSVGConfig, MainConfig } from "../mainConfig/MainConfigSchema";
 import { initInkscapeSVGLoader, InkscapeSVGLoader } from "@to-motion-canvas/inkscape-svg";
-import { initPathWrapper, PathWrapper } from "./wrappers/PathWrapper";
-import { initFactory, Factory as NodeTreeFactory } from "./motionCanvasNodeTree/factory/Factory";
+import { initPathWrapper, PathWrapper } from "../wrappers/PathWrapper";
+import { initFactory, Factory as NodeTreeFactory } from "../motionCanvasNodeTree/factory/Factory";
 
 export type OnChangeCallbackFn = (path: string) => Promise<void>;
 
-export interface InkscapeSVGToMotionCanvasIO {
+export interface VectorImageToMotionCanvasIO {
   readTranslateAndWriteAll(config: MainConfig): Promise<void>;
   getOnChangeCallbackFn(configs: InkscapeSVGConfig[]): OnChangeCallbackFn;
 }
 
-export class _InkscapeSVGToMotionCanvasIO
-  implements InkscapeSVGToMotionCanvasIO {
+export class _VectorImageToMotionCanvasIO
+  implements VectorImageToMotionCanvasIO {
   constructor(public deps: {
     pathWrapper: PathWrapper,
     inkscapeSVGLoader: InkscapeSVGLoader,
@@ -57,12 +57,12 @@ export class _InkscapeSVGToMotionCanvasIO
   }
 }
 
-export type InitInkscapeSVGToMotionCanvasIOFn
-  = () => InkscapeSVGToMotionCanvasIO;
+export type InitVectorImageToMotionCanvasIOFn
+  = () => VectorImageToMotionCanvasIO;
 
-export const initInkscapeSVGToMotionCanvasIO:
-  InitInkscapeSVGToMotionCanvasIOFn = () =>
-    new _InkscapeSVGToMotionCanvasIO({
+export const initVectorImageToMotionCanvasIO:
+  InitVectorImageToMotionCanvasIOFn = () =>
+    new _VectorImageToMotionCanvasIO({
       pathWrapper: initPathWrapper(),
       inkscapeSVGLoader: initInkscapeSVGLoader(),
       motionCanvasNodeTreeFactory: initFactory(),

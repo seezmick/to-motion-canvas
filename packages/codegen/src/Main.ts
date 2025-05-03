@@ -1,6 +1,6 @@
 import { ChokidarWrapper, initChokidarWrapper } from "./wrappers/ChokidarWrapper";
 import { initMainConfigLoader, MainConfigLoader } from "./mainConfig/MainConfigLoader";
-import { initInkscapeSVGToMotionCanvasIO, InkscapeSVGToMotionCanvasIO, } from "./InkscapeSVGToMotionCanvasIO";
+import { initVectorImageToMotionCanvasIO, VectorImageToMotionCanvasIO, } from "./vectorImageToMotionCanvasIO/VectorImageToMotionCanvasIO";
 
 export interface Main {
   run(): Promise<void>;
@@ -10,14 +10,14 @@ export class _Main implements Main {
   constructor(public deps: {
     mainConfigLoader: MainConfigLoader,
     chokidar: ChokidarWrapper,
-    inkscapeSVGToMotionCanvasIO: InkscapeSVGToMotionCanvasIO,
+    vectorImageToMotionCanvasIO: VectorImageToMotionCanvasIO,
   }) { }
 
   async run(): Promise<void> {
     const config = await this.deps.mainConfigLoader
       .load(`toMotionCanvasConfig.toml`);
 
-    await this.deps.inkscapeSVGToMotionCanvasIO
+    await this.deps.vectorImageToMotionCanvasIO
       .readTranslateAndWriteAll(config);
 
     const inputFilePaths = config.vectorImages
@@ -29,7 +29,7 @@ export class _Main implements Main {
       });
 
     watcher.on('change',
-      this.deps.inkscapeSVGToMotionCanvasIO
+      this.deps.vectorImageToMotionCanvasIO
         .getOnChangeCallbackFn(config.vectorImages));
   }
 }
@@ -39,5 +39,5 @@ export type InitMainFn = () => Main;
 export const initMain = () => new _Main({
   mainConfigLoader: initMainConfigLoader(),
   chokidar: initChokidarWrapper(),
-  inkscapeSVGToMotionCanvasIO: initInkscapeSVGToMotionCanvasIO(),
+  vectorImageToMotionCanvasIO: initVectorImageToMotionCanvasIO(),
 });

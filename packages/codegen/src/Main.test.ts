@@ -1,7 +1,7 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
 import { MainConfigLoader } from './mainConfig/MainConfigLoader';
-import { InkscapeSVGToMotionCanvasIO, OnChangeCallbackFn } from './InkscapeSVGToMotionCanvasIO';
+import { VectorImageToMotionCanvasIO, OnChangeCallbackFn } from './vectorImageToMotionCanvasIO/VectorImageToMotionCanvasIO';
 import { ChokidarWrapper } from './wrappers/ChokidarWrapper';
 import { _Main } from './Main';
 import { MainConfig } from './mainConfig/MainConfigSchema';
@@ -9,7 +9,7 @@ import { FSWatcherWrapper } from './wrappers/FSWatcherWrapper';
 
 t.test('run runs right!', async t => {
   const mainConfigLoader = Substitute.for<MainConfigLoader>();
-  const inkscapeSVGToMotionCanvasIO = Substitute.for<InkscapeSVGToMotionCanvasIO>();
+  const vectorImageToMotionCanvasIO = Substitute.for<VectorImageToMotionCanvasIO>();
   const chokidar = Substitute.for<ChokidarWrapper>();
 
   const mainConfig: MainConfig = {
@@ -48,7 +48,7 @@ t.test('run runs right!', async t => {
     .load('toMotionCanvasConfig.toml')
     .returns(Promise.resolve({ ...mainConfig } as MainConfig));
 
-  inkscapeSVGToMotionCanvasIO
+  vectorImageToMotionCanvasIO
     .readTranslateAndWriteAll({ ...mainConfig } as MainConfig)
     .returns(Promise.resolve());
 
@@ -65,13 +65,13 @@ t.test('run runs right!', async t => {
 
   const onChangeCallback: OnChangeCallbackFn = (_) => Promise.resolve();
 
-  inkscapeSVGToMotionCanvasIO
+  vectorImageToMotionCanvasIO
     .getOnChangeCallbackFn(mainConfig.vectorImages)
     .returns(onChangeCallback);
 
   const main = new _Main({
     mainConfigLoader,
-    inkscapeSVGToMotionCanvasIO,
+    vectorImageToMotionCanvasIO,
     chokidar,
   })
 
@@ -83,7 +83,7 @@ t.test('run runs right!', async t => {
     .received()
     .load('toMotionCanvasConfig.toml');
 
-  inkscapeSVGToMotionCanvasIO
+  vectorImageToMotionCanvasIO
     .received()
     .readTranslateAndWriteAll({ ...mainConfig } as MainConfig)
 

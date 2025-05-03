@@ -1,13 +1,13 @@
 import t from 'tap';
 import { Arg, Substitute } from '@fluffy-spoon/substitute';
-import { _InkscapeSVGToMotionCanvasIO } from './InkscapeSVGToMotionCanvasIO';
-import { FsWrapper } from './wrappers/FsWrapper';
-import { InkscapeSVGConfig, MainConfig } from './mainConfig/MainConfigSchema';
-import { PathWrapper } from './wrappers/PathWrapper';
+import { _VectorImageToMotionCanvasIO } from './VectorImageToMotionCanvasIO';
+import { FsWrapper } from '../wrappers/FsWrapper';
+import { InkscapeSVGConfig, MainConfig } from '../mainConfig/MainConfigSchema';
+import { PathWrapper } from '../wrappers/PathWrapper';
 import { InkscapeSVGLoader } from '@to-motion-canvas/inkscape-svg';
 import { InkscapeSVG } from '@to-motion-canvas/inkscape-svg';
-import { MotionCanvasNodeTree } from './motionCanvasNodeTree/MotionCanvasNodeTree';
-import { Factory } from './motionCanvasNodeTree/factory/Factory';
+import { MotionCanvasNodeTree } from '../motionCanvasNodeTree/MotionCanvasNodeTree';
+import { Factory } from '../motionCanvasNodeTree/factory/Factory';
 import { MotionCanvasNodeTreeFields } from '@to-motion-canvas/utilities';
 
 t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each',
@@ -127,7 +127,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       ]
     };
 
-    const svgToMotionCanvasIO = new _InkscapeSVGToMotionCanvasIO({
+    const svgToMotionCanvasIO = new _VectorImageToMotionCanvasIO({
       pathWrapper: Substitute.for<PathWrapper>(),
       inkscapeSVGLoader,
       motionCanvasNodeTreeFactory,
@@ -268,7 +268,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
     .generateOutputFiles(config2)
     .returns(Promise.resolve());
 
-  const svgToMotionCanvasIO = new _InkscapeSVGToMotionCanvasIO({
+  const svgToMotionCanvasIO = new _VectorImageToMotionCanvasIO({
     pathWrapper,
     inkscapeSVGLoader,
     motionCanvasNodeTreeFactory,
