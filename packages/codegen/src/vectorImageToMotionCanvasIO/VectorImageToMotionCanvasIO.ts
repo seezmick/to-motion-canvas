@@ -14,7 +14,7 @@ export class _VectorImageToMotionCanvasIO
   implements VectorImageToMotionCanvasIO {
   constructor(public deps: {
     pathWrapper: PathWrapper,
-    inkscapeSVGLoader: VectorImageLoader,
+    vectorImageLoader: VectorImageLoader,
     motionCanvasNodeTreeFactory: NodeTreeFactory,
   },) {
   }
@@ -24,9 +24,9 @@ export class _VectorImageToMotionCanvasIO
     for (const svgConfig of config.vectorImages) {
       const inputFilePath = svgConfig.input.filePath;
 
-      const inkscapeSVG = await this.deps.inkscapeSVGLoader.load(inputFilePath);
+      const vectorImage = await this.deps.vectorImageLoader.load(inputFilePath);
 
-      const motionCanvasNodeTreeFields = inkscapeSVG.toMotionCanvasNodeTreeFields();
+      const motionCanvasNodeTreeFields = vectorImage.toMotionCanvasNodeTreeFields();
       const motionCanvasNodeTree = this.deps
         .motionCanvasNodeTreeFactory.init(motionCanvasNodeTreeFields);
 
@@ -46,7 +46,7 @@ export class _VectorImageToMotionCanvasIO
       }
 
       const inputFilePath = config.input.filePath;
-      const inkscapeSVG = await this.deps.inkscapeSVGLoader.load(inputFilePath);
+      const inkscapeSVG = await this.deps.vectorImageLoader.load(inputFilePath);
 
       const motionCanvasNodeTreeFields = inkscapeSVG.toMotionCanvasNodeTreeFields();
       const newMotionCanvasNodeTree = this.deps
@@ -64,6 +64,6 @@ export const initVectorImageToMotionCanvasIO:
   InitVectorImageToMotionCanvasIOFn = () =>
     new _VectorImageToMotionCanvasIO({
       pathWrapper: initPathWrapper(),
-      inkscapeSVGLoader: initVectorImageLoader(),
+      vectorImageLoader: initVectorImageLoader(),
       motionCanvasNodeTreeFactory: initFactory(),
     });

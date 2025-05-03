@@ -1,10 +1,10 @@
 import { PathLike } from "fs";
-import { InkscapeSVG } from "@to-motion-canvas/inkscape-svg";
+import { VectorImage } from "@to-motion-canvas/utilities";
 import { FsWrapper, initFsWrapper } from "../wrappers/FsWrapper";
 import { initInkscapeSVGParser, InkscapeSVGParser } from "@to-motion-canvas/inkscape-svg";
 
 export interface VectorImageLoader {
-  load(inputFilePath: PathLike): Promise<InkscapeSVG>;
+  load(inputFilePath: PathLike): Promise<VectorImage>;
 }
 
 export class _VectorImageLoader implements VectorImageLoader {
@@ -13,7 +13,7 @@ export class _VectorImageLoader implements VectorImageLoader {
     inkscapeSVGParser: InkscapeSVGParser,
   }) { }
 
-  async load(inputFilePath: PathLike): Promise<InkscapeSVG> {
+  async load(inputFilePath: PathLike): Promise<VectorImage> {
     const svgContent = await this.deps.fs.readFile(inputFilePath);
     const inkscapeSVG = this.deps.inkscapeSVGParser.parse(svgContent);
     return inkscapeSVG;

@@ -1,4 +1,4 @@
-import { MotionCanvasNodeTreeFields } from '@to-motion-canvas/utilities';
+import { MotionCanvasNodeTreeFields, VectorImage } from '@to-motion-canvas/utilities';
 import { Element as InkscapeSVGElement } from './element/Element';
 
 export interface ViewBox {
@@ -15,8 +15,7 @@ export interface InkscapeSVGFields {
   viewBox: ViewBox;
 }
 
-export interface InkscapeSVG extends InkscapeSVGFields {
-  toMotionCanvasNodeTreeFields(): MotionCanvasNodeTreeFields;
+export interface InkscapeSVG extends InkscapeSVGFields, VectorImage {
 }
 
 export class _InkscapeSVG implements InkscapeSVG {

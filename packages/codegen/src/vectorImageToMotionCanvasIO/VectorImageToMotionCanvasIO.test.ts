@@ -4,8 +4,8 @@ import { _VectorImageToMotionCanvasIO } from './VectorImageToMotionCanvasIO';
 import { FsWrapper } from '../wrappers/FsWrapper';
 import { InkscapeSVGConfig, MainConfig } from '../mainConfig/MainConfigSchema';
 import { PathWrapper } from '../wrappers/PathWrapper';
-import { InkscapeSVGLoader } from '@to-motion-canvas/inkscape-svg';
-import { InkscapeSVG } from '@to-motion-canvas/inkscape-svg';
+import { VectorImageLoader } from './VectorImageLoader';
+import { VectorImage } from '@to-motion-canvas/utilities';
 import { MotionCanvasNodeTree } from '../motionCanvasNodeTree/MotionCanvasNodeTree';
 import { Factory } from '../motionCanvasNodeTree/factory/Factory';
 import { MotionCanvasNodeTreeFields } from '@to-motion-canvas/utilities';
@@ -17,7 +17,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
         filePath: "./circles_1920_by_1080.svg",
       },
       output: {
-        directoryPath: "./src/inkscapeSVGGenerated",
+        directoryPath: "./src/vectorImageGenerated",
         viewAdderFunctionName: 'circles1920By1080',
       }
     };
@@ -27,7 +27,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
         filePath: "./rects_1920_by_1080.svg",
       },
       output: {
-        directoryPath: "./src/inkscapeSVGGenerated",
+        directoryPath: "./src/vectorImageGenerated",
         viewAdderFunctionName: 'rects1920By1080',
       }
     }
@@ -43,20 +43,20 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
     };
 
     const motionCanvasNodeTreeFactory = Substitute.for<Factory>();
-    const inkscapeSVGLoader = Substitute.for<InkscapeSVGLoader>();
+    const vectorImageLoader = Substitute.for<VectorImageLoader>();
 
     // start 1
-    const inkscapeSVG1 = Substitute.for<InkscapeSVG>();
-    inkscapeSVGLoader
+    const vectorImage1 = Substitute.for<VectorImage>();
+    vectorImageLoader
       .load("./circles_1920_by_1080.svg")
-      .returns(Promise.resolve(inkscapeSVG1));
+      .returns(Promise.resolve(vectorImage1));
 
     const motionCanvasNodeTree1Fields: MotionCanvasNodeTreeFields = {
       nodes: [],
       canvasHeight: 1234,
       canvasWidth: 4567,
     };
-    inkscapeSVG1
+    vectorImage1
       .toMotionCanvasNodeTreeFields()
       .returns(motionCanvasNodeTree1Fields);
 
@@ -70,17 +70,17 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       .returns(Promise.resolve());
     // end 1
     // start 2
-    const inkscapeSVG2 = Substitute.for<InkscapeSVG>();
-    inkscapeSVGLoader
+    const vectorImage2 = Substitute.for<VectorImage>();
+    vectorImageLoader
       .load("./rects_1920_by_1080.svg")
-      .returns(Promise.resolve(inkscapeSVG2));
+      .returns(Promise.resolve(vectorImage2));
 
     const motionCanvasNodeTree2Fields: MotionCanvasNodeTreeFields = {
       nodes: [],
       canvasHeight: 4218,
       canvasWidth: 1111,
     };
-    inkscapeSVG2
+    vectorImage2
       .toMotionCanvasNodeTreeFields()
       .returns(motionCanvasNodeTree2Fields);
 
@@ -94,17 +94,17 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       .returns(Promise.resolve());
     // end 2
     // start 3
-    const inkscapeSVG3 = Substitute.for<InkscapeSVG>();
-    inkscapeSVGLoader
+    const vectorImage3 = Substitute.for<VectorImage>();
+    vectorImageLoader
       .load("./landing_page_lg.svg")
-      .returns(Promise.resolve(inkscapeSVG3));
+      .returns(Promise.resolve(vectorImage3));
 
     const motionCanvasNodeTree3Fields: MotionCanvasNodeTreeFields = {
       nodes: [],
       canvasHeight: 4318,
       canvasWidth: 1111,
     };
-    inkscapeSVG3
+    vectorImage3
       .toMotionCanvasNodeTreeFields()
       .returns(motionCanvasNodeTree3Fields);
 
@@ -129,7 +129,7 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
 
     const svgToMotionCanvasIO = new _VectorImageToMotionCanvasIO({
       pathWrapper: Substitute.for<PathWrapper>(),
-      inkscapeSVGLoader,
+      vectorImageLoader: vectorImageLoader,
       motionCanvasNodeTreeFactory,
     });
 
@@ -138,11 +138,11 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
     // start testing internal
 
     // start 1
-    inkscapeSVGLoader
+    vectorImageLoader
       .received()
       .load("./circles_1920_by_1080.svg");
 
-    inkscapeSVG1
+    vectorImage1
       .received()
       .toMotionCanvasNodeTreeFields();
 
@@ -155,11 +155,11 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       .generateOutputFiles(config1);
     // end 1
     // start 2
-    inkscapeSVGLoader
+    vectorImageLoader
       .received()
       .load("./circles_1920_by_1080.svg");
 
-    inkscapeSVG2
+    vectorImage2
       .received()
       .toMotionCanvasNodeTreeFields();
 
@@ -172,11 +172,11 @@ t.test('readTranslateAndWriteAll reads InkscapeSVGs, translates, and writes each
       .generateOutputFiles(config2);
     // end 2
     // start 3
-    inkscapeSVGLoader
+    vectorImageLoader
       .received()
       .load("./circles_1920_by_1080.svg");
 
-    inkscapeSVG3
+    vectorImage3
       .received()
       .toMotionCanvasNodeTreeFields();
 
@@ -199,7 +199,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
       filePath: "./circles_1920_by_1080.svg",
     },
     output: {
-      directoryPath: "./src/inkscapeSVGGenerated",
+      directoryPath: "./src/vectorImageGenerated",
       viewAdderFunctionName: 'circles1920By1080',
     }
   };
@@ -209,7 +209,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
       filePath: "./rects_1920_by_1080.svg",
     },
     output: {
-      directoryPath: "./src/inkscapeSVGGenerated",
+      directoryPath: "./src/vectorImageGenerated",
       viewAdderFunctionName: 'rects1920By1080',
     }
   }
@@ -242,19 +242,19 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
 
 
   const motionCanvasNodeTreeFactory = Substitute.for<Factory>();
-  const inkscapeSVGLoader = Substitute.for<InkscapeSVGLoader>();
+  const vectorImageLoader = Substitute.for<VectorImageLoader>();
 
-  const inkscapeSVG = Substitute.for<InkscapeSVG>();
-  inkscapeSVGLoader
+  const vectorImage = Substitute.for<VectorImage>();
+  vectorImageLoader
     .load("./rects_1920_by_1080.svg")
-    .returns(Promise.resolve(inkscapeSVG));
+    .returns(Promise.resolve(vectorImage));
 
   const motionCanvasNodeTreeFields: MotionCanvasNodeTreeFields = {
     nodes: [],
     canvasHeight: 234,
     canvasWidth: 4567,
   };
-  inkscapeSVG
+  vectorImage
     .toMotionCanvasNodeTreeFields()
     .returns(motionCanvasNodeTreeFields);
 
@@ -270,7 +270,7 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
 
   const svgToMotionCanvasIO = new _VectorImageToMotionCanvasIO({
     pathWrapper,
-    inkscapeSVGLoader,
+    vectorImageLoader,
     motionCanvasNodeTreeFactory,
   });
 
@@ -291,11 +291,11 @@ t.test('getOnChangeCallback gives a function with the right behaviour', async t 
       './rects_1920_by_1080.svg',
       'rects_1920_by_1080.svg');
 
-  inkscapeSVGLoader
+  vectorImageLoader
     .received()
     .load("./rects_1920_by_1080.svg");
 
-  inkscapeSVG
+  vectorImage
     .received()
     .toMotionCanvasNodeTreeFields();
 

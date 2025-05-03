@@ -25,4 +25,8 @@ export {
 	MotionCanvasNodeTreeFields
 } from "./motionCanvasNodeTreeFields/MotionCanvasNodeTreeFields";
 
+export {
+	VectorImage
+} from "./VectorImage";
+
 export { Position } from "./Position";
