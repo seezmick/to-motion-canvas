@@ -4,8 +4,6 @@ import { Node } from "./node/Node";
 
 export interface RenderInfo {
 	jsxComponents: JSXComponent[];
-	// TODO: define files like CustomCircle.ts
-	//helperFiles: string[];
 	references: NodeReference[];
 }
 
@@ -16,6 +14,8 @@ export interface MotionCanvasNodesList {
 export class _MotionCanvasNodesList implements MotionCanvasNodesList {
 	constructor(public nodes: Node[]) { }
 
+	// This method is general for the sake of looping over the nodes
+	// only once for better performance
 	getRenderInfo(): RenderInfo {
 		const jsxComponents: JSXComponent[] = [];
 		let references: NodeReference[] = [];
