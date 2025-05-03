@@ -1,7 +1,7 @@
 export {
-  initInkscapeSVGLoader,
-  InkscapeSVGLoader
-} from './InkscapeSVGLoader';
+  initInkscapeSVGParser,
+  InkscapeSVGParser
+} from './InkscapeSVGParser';
 
 export {
   InkscapeSVG

@@ -1,13 +1,13 @@
 import { PathLike } from "fs";
-import { InkscapeSVG } from "./InkscapeSVG";
-import { FsWrapper, initFsWrapper } from "./wrappers/FsWrapper";
-import { initInkscapeSVGParser, InkscapeSVGParser } from "./InkscapeSVGParser";
+import { InkscapeSVG } from "@to-motion-canvas/inkscape-svg";
+import { FsWrapper, initFsWrapper } from "../wrappers/FsWrapper";
+import { initInkscapeSVGParser, InkscapeSVGParser } from "@to-motion-canvas/inkscape-svg";
 
-export interface InkscapeSVGLoader {
+export interface VectorImageLoader {
   load(inputFilePath: PathLike): Promise<InkscapeSVG>;
 }
 
-export class _InkscapeSVGLoader implements InkscapeSVGLoader {
+export class _VectorImageLoader implements VectorImageLoader {
   constructor(public deps: {
     fs: FsWrapper,
     inkscapeSVGParser: InkscapeSVGParser,
@@ -20,9 +20,9 @@ export class _InkscapeSVGLoader implements InkscapeSVGLoader {
   }
 }
 
-export type InitInkscapeSVGLoaderFn = () => InkscapeSVGLoader;
+export type InitVectorImageLoaderFn = () => VectorImageLoader;
 
-export const initInkscapeSVGLoader = () => new _InkscapeSVGLoader({
+export const initVectorImageLoader = () => new _VectorImageLoader({
   fs: initFsWrapper(),
   inkscapeSVGParser: initInkscapeSVGParser(),
 });

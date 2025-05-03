@@ -1,5 +1,5 @@
 import { InkscapeSVGConfig, MainConfig } from "../mainConfig/MainConfigSchema";
-import { initInkscapeSVGLoader, InkscapeSVGLoader } from "@to-motion-canvas/inkscape-svg";
+import { initVectorImageLoader, VectorImageLoader } from "./VectorImageLoader";
 import { initPathWrapper, PathWrapper } from "../wrappers/PathWrapper";
 import { initFactory, Factory as NodeTreeFactory } from "../motionCanvasNodeTree/factory/Factory";
 
@@ -14,7 +14,7 @@ export class _VectorImageToMotionCanvasIO
   implements VectorImageToMotionCanvasIO {
   constructor(public deps: {
     pathWrapper: PathWrapper,
-    inkscapeSVGLoader: InkscapeSVGLoader,
+    inkscapeSVGLoader: VectorImageLoader,
     motionCanvasNodeTreeFactory: NodeTreeFactory,
   },) {
   }
@@ -64,6 +64,6 @@ export const initVectorImageToMotionCanvasIO:
   InitVectorImageToMotionCanvasIOFn = () =>
     new _VectorImageToMotionCanvasIO({
       pathWrapper: initPathWrapper(),
-      inkscapeSVGLoader: initInkscapeSVGLoader(),
+      inkscapeSVGLoader: initVectorImageLoader(),
       motionCanvasNodeTreeFactory: initFactory(),
     });
