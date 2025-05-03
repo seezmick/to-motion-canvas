@@ -1,5 +1,13 @@
 # @to-motion-canvas/codegen
 
+## 0.0.15
+
+### Patch Changes
+
+- 64c475c: Moved InkscapeSVGLoader back to become VectorImageLoader in @to-motion-canvas/codegen
+- Updated dependencies [64c475c]
+  - @to-motion-canvas/inkscape-svg@0.0.4
+
 ## 0.0.14
 
 ### Patch Changes
