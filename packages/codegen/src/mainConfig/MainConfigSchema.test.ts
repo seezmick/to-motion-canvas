@@ -13,6 +13,20 @@ t.test('parse correctly parses a MainConfig', t => {
         output: {
           directoryPath: "./src/inkscapeSVGGenerated",
           viewAdderFunctionName: 'circles1920By1080',
+          customComponentImportPaths: {
+            Rect: "./src/components/Rect.ts",
+          }
+        }
+      },
+      {
+        input: {
+          filePath: "./rects_1920_by_1080.svg",
+        },
+        output: {
+          directoryPath: "./src/inkscapeSVGGenerated",
+          viewAdderFunctionName: 'rects1920By1080',
+          customComponentImportPaths: {
+          }
         }
       },
       {
