@@ -38,11 +38,22 @@ t.test('toFileContentString correctly stringifies', async t => {
 
 	const codeRenderer = Substitute.for<MotionCanvasCodeRenderer>();
 
+	const config: InkscapeSVGConfig = {
+		input: {
+			filePath: "./landing_page_lg.svg",
+		},
+		output: {
+			directoryPath: "./src/pagesOutput",
+			viewAdderFunctionName: 'landingPageLarge',
+		}
+	};
 
 	const renderArgs: OutputFileFields = {
 		viewAdderFunctionName: 'landingPageLarge',
 		components: [...renderInfo.jsxComponents],
 		references: [...renderInfo.references],
+		customComponentImportPaths: config.output.customComponentImportPaths,
+		outputDirectory: config.output.directoryPath,
 	};
 
 	codeRenderer.render(renderArgs)
@@ -61,15 +72,7 @@ t.test('toFileContentString correctly stringifies', async t => {
 		canvasWidth: 1920,
 	} satisfies InitMotionCanvasNodeTreeFnArg);
 
-	await motionCanvasNodeTree.generateOutputFiles({
-		input: {
-			filePath: "./landing_page_lg.svg",
-		},
-		output: {
-			directoryPath: "./src/pagesOutput",
-			viewAdderFunctionName: 'landingPageLarge',
-		}
-	} satisfies InkscapeSVGConfig);
+	await motionCanvasNodeTree.generateOutputFiles({ ...config });
 
 	// start testing internal calls
 

@@ -39,6 +39,8 @@ export class _MotionCanvasNodeTree
 			viewAdderFunctionName,
 			components: jsxComponents,
 			references,
+			customComponentImportPaths: config.output.customComponentImportPaths,
+			outputDirectory: config.output.directoryPath,
 		} satisfies OutputFileFields);
 
 		const outputDirectoryPath = config.output.directoryPath;

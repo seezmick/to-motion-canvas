@@ -1,3 +1,5 @@
+import { CustomComponentImportPaths } from '../mainConfig/MainConfigSchema';
+import { ComponentImportPathsRenderer, initComponentImportPathsRenderer } from './ComponentImportPathsRenderer';
 import { JSXComponent } from './node/jsxComponent/JSXComponent';
 
 export interface NodeReference {
@@ -10,18 +12,34 @@ export interface OutputFileFields {
 	viewAdderFunctionName: string,
 	components: JSXComponent[],
 	references: NodeReference[],
+	customComponentImportPaths: CustomComponentImportPaths,
+	outputDirectory: string,
 }
 
 export interface MotionCanvasCodeRenderer {
 	render(f: OutputFileFields): string;
 }
 
+// TODO: create a folder named motionCanvasCodeRenderer 
+// and move ./ComponentImportPathsRenderer in there
 export class _MotionCanvasCodeRenderer implements MotionCanvasCodeRenderer {
+	constructor(public deps: {
+		customComponentImportPathsRenderer: ComponentImportPathsRenderer,
+	}) { }
 
 	render(f: OutputFileFields): string {
+		const customComponentImports = this.deps
+			.customComponentImportPathsRenderer
+			.renderImports({
+				pathsFromProjectRoot: f.customComponentImportPaths,
+				renderPathRelativeTo: f.outputDirectory,
+				componentsUsed: f.references.map(ref => ref.type),
+			});
+
 		const result = `\
-import { Rect, Node } from "@motion-canvas/2d";
-import { createRef } from '@motion-canvas/core';
+import { Node } from "@motion-canvas/2d";
+import { createRef } from "@motion-canvas/core";
+${customComponentImports.join('\n')}
 
 export function ${f.viewAdderFunctionName}(node: Node) {
 ${f.references.map(ref =>
@@ -42,4 +60,6 @@ ${f.references.map(ref => `		${ref.variableName},`).join('\n')}
 
 export type InitMotionCanvasCodeRendererFn = () => MotionCanvasCodeRenderer;
 
-export const initMotionCanvasCodeRenderer = () => new _MotionCanvasCodeRenderer();
+export const initMotionCanvasCodeRenderer = () => new _MotionCanvasCodeRenderer({
+	customComponentImportPathsRenderer: initComponentImportPathsRenderer(),
+});
