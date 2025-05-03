@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.13
+
+### Patch Changes
+
+- 446a07a: implemented basic bring-your-own-component system try 1
+
 ## 0.0.12
 
 ### Patch Changes
