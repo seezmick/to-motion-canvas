@@ -2,6 +2,7 @@ import { JSXComponent } from './node/jsxComponent/JSXComponent';
 
 export interface NodeReference {
 	variableName: string;
+	// change to limited type that names all the Motion Canvas components
 	type: string;
 }
 

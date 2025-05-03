@@ -26,6 +26,6 @@ t.test('renderImports works', async t => {
 		'import { Rect } from "@motion-canvas/2d";',
 	];
 
-	t.equal(found, wanted);
+	t.same(found, wanted);
 	t.end();
 });

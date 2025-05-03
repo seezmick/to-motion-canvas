@@ -23,16 +23,16 @@ export class _ComponentImportPathsRenderer {
 	}: RenderImportsFnArg): string[] {
 		const customComponentImports = [];
 		const motionCanvasComponentsUsed = [];
-		for (let [component, path] of Object.entries(pathsFromProjectRoot ?? {})) {
-			if (componentsUsed.includes(component)) {
-				if (path != null) {
-					const importPath = this.deps.pathWrapper
-						.relative(renderPathRelativeTo, path);
-					customComponentImports.push(`import { ${component} } from "${importPath}";`)
-				}
-				else {
-					motionCanvasComponentsUsed.push(component);
-				}
+		for (let component of componentsUsed) {
+			const path: string | null = pathsFromProjectRoot != null
+				? (pathsFromProjectRoot as Record<string, string>)[component] : null;
+			if (path != null) {
+				const importPath = this.deps.pathWrapper
+					.relative(renderPathRelativeTo, path);
+				customComponentImports.push(`import { ${component} } from "${importPath}";`)
+			}
+			else {
+				motionCanvasComponentsUsed.push(component);
 			}
 		}
 		return [
