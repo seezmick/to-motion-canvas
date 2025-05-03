@@ -54,7 +54,7 @@ t.test('renderImports works for custom components', async t => {
 
 	const wanted = [
 		'import { Circle } from "@motion-canvas/2d";',
-		'import { Rect } from "../components/Rect.ts";',
+		'import { Rect } from "../components/Rect";',
 	];
 
 	// start testing internal calls

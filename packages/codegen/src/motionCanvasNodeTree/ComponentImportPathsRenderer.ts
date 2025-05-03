@@ -27,8 +27,10 @@ export class _ComponentImportPathsRenderer {
 			const path: string | null = pathsFromProjectRoot != null
 				? (pathsFromProjectRoot as Record<string, string>)[component] : null;
 			if (path != null) {
-				const importPath = this.deps.pathWrapper
+				let importPath = this.deps.pathWrapper
 					.relative(renderPathRelativeTo, path);
+
+				importPath = importPath.replace(/\.ts$/, '');
 				customComponentImports.push(`import { ${component} } from "${importPath}";`)
 			}
 			else {

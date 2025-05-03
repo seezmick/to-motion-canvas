@@ -26,7 +26,7 @@ t.test('render gives correctly constructed string', t => {
 		.toFileContentString('\t', 2)
 		.returns(
 			`		{/* red-fill-and-stroke-rect-square-sharp-corners */}
-		<Line
+		<Rect
 			ref={redFillAndStrokeRectSquareSharpCorners}
 			width={scaleCoord(81.960045)}
 			height={scaleCoord(81.960045)}
@@ -69,7 +69,7 @@ t.test('render gives correctly constructed string', t => {
 			},
 			{
 				variableName: 'redFillAndStrokeRectSquareSharpCorners',
-				type: 'Line',
+				type: 'Rect',
 			},
 			{
 				variableName: 'yellowFillAndStrokeRectSquareRoundedCorners',
@@ -85,9 +85,9 @@ t.test('render gives correctly constructed string', t => {
 			Rect: './src/components/Rect.ts',
 		},
 		renderPathRelativeTo: './src/generatedCode',
-		componentsUsed: ['Rect', 'Line', 'Circle'],
+		componentsUsed: ['Rect', 'Circle'],
 	}).returns([
-		'import { Circle, Line } from "@motion-canvas/2d";',
+		'import { Circle } from "@motion-canvas/2d";',
 		'import { Rect } from "./src/components/Rect.ts";',
 	]);
 
@@ -100,12 +100,12 @@ t.test('render gives correctly constructed string', t => {
 
 	const wanted = `import { Node } from "@motion-canvas/2d";
 import { createRef } from "@motion-canvas/core";
-import { Circle, Line } from "@motion-canvas/2d";
+import { Circle } from "@motion-canvas/2d";
 import { Rect } from "./src/components/Rect.ts";
 
 export function rects1920By1080(node: Node) {
 	const greenFillAndStrokeRectXLongSharpCorners = createRef<Rect>();
-	const redFillAndStrokeRectSquareSharpCorners = createRef<Line>();
+	const redFillAndStrokeRectSquareSharpCorners = createRef<Rect>();
 	const yellowFillAndStrokeRectSquareRoundedCorners = createRef<Circle>();
 
 	node.add(<>
@@ -120,7 +120,7 @@ export function rects1920By1080(node: Node) {
 			lineWidth={scaleCoord(1.23096)}
 		/>
 		{/* red-fill-and-stroke-rect-square-sharp-corners */}
-		<Line
+		<Rect
 			ref={redFillAndStrokeRectSquareSharpCorners}
 			width={scaleCoord(81.960045)}
 			height={scaleCoord(81.960045)}

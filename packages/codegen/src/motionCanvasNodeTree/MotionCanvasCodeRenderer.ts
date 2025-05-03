@@ -33,7 +33,7 @@ export class _MotionCanvasCodeRenderer implements MotionCanvasCodeRenderer {
 			.renderImports({
 				pathsFromProjectRoot: f.customComponentImportPaths,
 				renderPathRelativeTo: f.outputDirectory,
-				componentsUsed: f.references.map(ref => ref.type),
+				componentsUsed: [...new Set(f.references.map(ref => ref.type))],
 			});
 
 		const result = `\
