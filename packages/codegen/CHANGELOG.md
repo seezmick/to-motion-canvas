@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.12
+
+### Patch Changes
+
+- bbc7733: updated the main config's formatting try 2
+
 ## 0.0.11
 
 ### Patch Changes
