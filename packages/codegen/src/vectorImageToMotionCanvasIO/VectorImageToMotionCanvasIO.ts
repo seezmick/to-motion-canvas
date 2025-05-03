@@ -46,9 +46,9 @@ export class _VectorImageToMotionCanvasIO
       }
 
       const inputFilePath = config.input.filePath;
-      const inkscapeSVG = await this.deps.vectorImageLoader.load(inputFilePath);
+      const vectorImage = await this.deps.vectorImageLoader.load(inputFilePath);
 
-      const motionCanvasNodeTreeFields = inkscapeSVG.toMotionCanvasNodeTreeFields();
+      const motionCanvasNodeTreeFields = vectorImage.toMotionCanvasNodeTreeFields();
       const newMotionCanvasNodeTree = this.deps
         .motionCanvasNodeTreeFactory.init(motionCanvasNodeTreeFields);
 

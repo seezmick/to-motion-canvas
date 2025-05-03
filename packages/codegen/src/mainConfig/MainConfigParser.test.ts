@@ -14,14 +14,14 @@ t.test('parse correctly parses a MainConfig', t => {
 filePath= "./rects_1920_by_1080.svg"
 [vectorImages.output]
 viewAdderFunctionName= "rects1920By1080"
-directoryPath= "./src/inkscapeSVGGenerated"
+directoryPath= "./src/vectorImageGenerated"
 
 [[vectorImages]]
 [vectorImages.input]
 filePath= "./circles_1920_by_1080.svg"
 [vectorImages.output]
 viewAdderFunctionName= "circles1920By1080"
-directoryPath= "./src/inkscapeSVGGenerated"
+directoryPath= "./src/vectorImageGenerated"
 `;
 
   const mainConfig = {

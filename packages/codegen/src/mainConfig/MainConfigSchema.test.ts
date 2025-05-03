@@ -11,7 +11,7 @@ t.test('parse correctly parses a MainConfig', t => {
           filePath: "./circles_1920_by_1080.svg",
         },
         output: {
-          directoryPath: "./src/inkscapeSVGGenerated",
+          directoryPath: "./src/vectorImageGenerated",
           viewAdderFunctionName: 'circles1920By1080',
           customComponentImportPaths: {
             Rect: "./src/components/Rect.ts",
@@ -23,7 +23,7 @@ t.test('parse correctly parses a MainConfig', t => {
           filePath: "./rects_1920_by_1080.svg",
         },
         output: {
-          directoryPath: "./src/inkscapeSVGGenerated",
+          directoryPath: "./src/vectorImageGenerated",
           viewAdderFunctionName: 'rects1920By1080',
           customComponentImportPaths: {
           }
@@ -34,7 +34,7 @@ t.test('parse correctly parses a MainConfig', t => {
           filePath: "./rects_1920_by_1080.svg",
         },
         output: {
-          directoryPath: "./src/inkscapeSVGGenerated",
+          directoryPath: "./src/vectorImageGenerated",
           viewAdderFunctionName: 'rects1920By1080',
         }
       },

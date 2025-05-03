@@ -19,7 +19,7 @@ t.test('run runs right!', async t => {
           filePath: "./circles_1920_by_1080.svg",
         },
         output: {
-          directoryPath: "./src/inkscapeSVGGenerated",
+          directoryPath: "./src/vectorImageGenerated",
           viewAdderFunctionName: 'circles1920By1080',
         }
       },
@@ -28,7 +28,7 @@ t.test('run runs right!', async t => {
           filePath: "./rects_1920_by_1080.svg",
         },
         output: {
-          directoryPath: "./src/inkscapeSVGGenerated",
+          directoryPath: "./src/vectorImageGenerated",
           viewAdderFunctionName: 'rects1920By1080',
         }
       },
