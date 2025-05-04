@@ -13,7 +13,9 @@
     "test": "tap run",
     "pretest": "pnpm run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@motion-canvas/2d": "^3.17.2"
+  },
   "devDependencies": {
     "@fluffy-spoon/substitute": "^1.208.0",
     "@rollup/plugin-commonjs": "^28.0.2",
