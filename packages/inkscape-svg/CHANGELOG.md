@@ -1,5 +1,13 @@
 # @to-motion-canvas/codegen
 
+## 0.0.5
+
+### Patch Changes
+
+- 1fde5d7: Minimized dependence of codegen package on inkscape-svg package using utitlies package as was intended
+- Updated dependencies [1fde5d7]
+  - @to-motion-canvas/utilities@0.0.7
+
 ## 0.0.4
 
 ### Patch Changes
