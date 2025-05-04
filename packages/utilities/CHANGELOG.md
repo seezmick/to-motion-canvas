@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.8
+
+### Patch Changes
+
+- 094e0c2: updated across all packages, dependencies on @motion-canvas
+
 ## 0.0.7
 
 ### Patch Changes
