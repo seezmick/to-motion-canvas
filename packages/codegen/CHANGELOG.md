@@ -1,5 +1,13 @@
 # @to-motion-canvas/codegen
 
+## 0.0.18
+
+### Patch Changes
+
+- Updated dependencies [1df4c47]
+  - @to-motion-canvas/utilities@0.0.9
+  - @to-motion-canvas/inkscape-svg@0.0.7
+
 ## 0.0.17
 
 ### Patch Changes

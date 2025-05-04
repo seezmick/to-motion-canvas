@@ -1,5 +1,11 @@
 # @to-motion-canvas/codegen
 
+## 0.0.9
+
+### Patch Changes
+
+- 1df4c47: made RectNodeFields rely on @motion-canvas/2d NodeProps to increase the range of possibility"
+
 ## 0.0.8
 
 ### Patch Changes

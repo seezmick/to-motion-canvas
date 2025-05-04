@@ -1,5 +1,12 @@
 # @to-motion-canvas/codegen
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [1df4c47]
+  - @to-motion-canvas/utilities@0.0.9
+
 ## 0.0.6
 
 ### Patch Changes
